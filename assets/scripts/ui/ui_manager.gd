@@ -11,7 +11,4 @@ func _process(delta: float) -> void:
 
 
 func _on_pitcher_update_pitch_windup(stage: Variant, value: Variant) -> void:
-	if stage == 1: # windup 1
-		$PitchingMeter.update_progress(value)
-	elif stage == 2: #windup 2
-		$PitchingMeter.update_progress(1 - value)
+	$PitchingMeter.update_progress(stage, value)

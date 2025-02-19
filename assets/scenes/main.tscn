@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
-[ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/UI/pitching_hud.tscn" id="2_024tn"]
-[ext_resource type="Script" path="res://assets/UI/ui_manager.gd" id="3_6ernd"]
+[ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
+[ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="3_6ernd"]
 
 [node name="root" type="Node3D"]
 
@@ -10,7 +10,7 @@
 transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.56247)
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.160014, 0, -1.36547)
+transform = Transform3D(-0.969321, 0, 0.245798, 0, 1, 0, -0.245798, 0, -0.969321, -0.485404, -0.603749, 0.578837)
 
 [node name="PitchingHud" parent="." groups=["ui"] instance=ExtResource("2_024tn")]
 script = ExtResource("3_6ernd")

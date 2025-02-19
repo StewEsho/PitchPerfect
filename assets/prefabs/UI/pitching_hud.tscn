@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=9 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Texture2D" uid="uid://bf8tmd7rkmu00" path="res://assets/art/ui/pitching_meter_empty.png" id="2_nedva"]
-[ext_resource type="Shader" path="res://assets/UI/pitching_hud.gdshader" id="3_7s68d"]
+[ext_resource type="Material" uid="uid://0l7ccbqfacy0" path="res://assets/prefabs/UI/power_meter_mat.tres" id="3_1ekch"]
 [ext_resource type="Texture2D" uid="uid://dwkr0oq50b24l" path="res://assets/art/ui/pitching_meter_full.png" id="4_7uqef"]
 [ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
+[ext_resource type="Shader" path="res://assets/pitching_hud.gdshader" id="6_qlrnj"]
+[ext_resource type="Texture2D" uid="uid://cprbjn0cnuas3" path="res://assets/art/ui/pitching_meter_power.png" id="6_wyqoh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vqhwl"]
-shader = ExtResource("3_7s68d")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5oox"]
+shader = ExtResource("6_qlrnj")
 shader_parameter/progress = 0.0
+shader_parameter/goingLeft = true
 
 [node name="PitchingHud" type="Control"]
 layout_mode = 3
@@ -37,9 +40,14 @@ script = ExtResource("1_d6u8m")
 texture = ExtResource("2_nedva")
 offset = Vector2(120, 51)
 
-[node name="PitchingMeterFull" type="Sprite2D" parent="PitchingMeter"]
-material = SubResource("ShaderMaterial_vqhwl")
+[node name="PitchingMeterPower" type="Sprite2D" parent="PitchingMeter"]
+material = ExtResource("3_1ekch")
 texture = ExtResource("4_7uqef")
+offset = Vector2(120, 51)
+
+[node name="PitchingMeterAccuracy" type="Sprite2D" parent="PitchingMeter"]
+material = SubResource("ShaderMaterial_u5oox")
+texture = ExtResource("6_wyqoh")
 offset = Vector2(120, 51)
 
 [node name="PitchingMeterFrame" type="Sprite2D" parent="PitchingMeter"]
