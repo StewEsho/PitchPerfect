@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjfgt24yonh2i"]
+
+[ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
+[ext_resource type="Texture2D" uid="uid://bf8tmd7rkmu00" path="res://assets/art/ui/pitching_meter_empty.png" id="2_nedva"]
+[ext_resource type="Shader" path="res://assets/UI/pitching_hud.gdshader" id="3_7s68d"]
+[ext_resource type="Texture2D" uid="uid://dwkr0oq50b24l" path="res://assets/art/ui/pitching_meter_full.png" id="4_7uqef"]
+[ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vqhwl"]
+shader = ExtResource("3_7s68d")
+shader_parameter/progress = 0.0
+
+[node name="PitchingHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PitchingMeter" type="Container" parent="." groups=["ui"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = -132.0
+offset_right = -28.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_d6u8m")
+
+[node name="PitchingMeterEmpty" type="Sprite2D" parent="PitchingMeter"]
+texture = ExtResource("2_nedva")
+offset = Vector2(120, 51)
+
+[node name="PitchingMeterFull" type="Sprite2D" parent="PitchingMeter"]
+material = SubResource("ShaderMaterial_vqhwl")
+texture = ExtResource("4_7uqef")
+offset = Vector2(120, 51)
+
+[node name="PitchingMeterFrame" type="Sprite2D" parent="PitchingMeter"]
+texture = ExtResource("5_kv8by")
+offset = Vector2(120, 51)
