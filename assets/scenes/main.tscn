@@ -1,16 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8w6yc4jlcj3v"]
+[gd_scene load_steps=7 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
+[ext_resource type="Texture2D" uid="uid://bt1eve42277lx" path="res://assets/art/batters_box.png" id="2_8m7o4"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="3_6ernd"]
+[ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
+
+[sub_resource type="Environment" id="Environment_6m55l"]
+background_mode = 1
+background_color = Color(0.925576, 0.866331, 0.484424, 1)
+background_energy_multiplier = 0.2
+ambient_light_source = 2
+ambient_light_color = Color(0.270714, 0.504761, 0.765007, 1)
+ambient_light_energy = 0.2
+fog_enabled = true
 
 [node name="root" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.56247)
+transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.72222)
+environment = SubResource("Environment_6m55l")
+fov = 60.0
+
+[node name="background" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -9.23893)
+texture = ExtResource("4_00f4o")
+
+[node name="batters_box" type="Sprite3D" parent="Camera3D/background"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.001)
+texture = ExtResource("2_8m7o4")
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
 transform = Transform3D(-0.969321, 0, 0.245798, 0, 1, 0, -0.245798, 0, -0.969321, -0.485404, -0.603749, 0.578837)
+
+[node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
+transform = Transform3D(0.471823, -0.170611, -0.865029, 0.340051, 0.940407, 0, 0.813479, -0.294154, 0.501722, 0.842163, -0.292458, 0.482298)
 
 [node name="PitchingHud" parent="." groups=["ui"] instance=ExtResource("2_024tn")]
 script = ExtResource("3_6ernd")
@@ -28,3 +52,4 @@ light_color = Color(0.32341, 0.631937, 0.322251, 1)
 light_energy = 0.2
 
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
+[connection signal="update_pitch_windup" from="Pitcher2" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]

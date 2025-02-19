@@ -22,6 +22,7 @@ var accuracy_pitch := PitchData.new()
 func _ready() -> void:
 	power_pitch.time_to_swing = pitch_progress_time
 	accuracy_pitch.time_to_swing = pitch_progress_time
+	accuracy_pitch.progress = 0.05  # start with a little bit in the tank
 
 func windup(delta: float, data) -> bool:
 	data.progress += minf(delta / data.time_to_swing, 1.0)
