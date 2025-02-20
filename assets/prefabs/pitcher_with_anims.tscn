@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj44yg41sxtm4"]
+
+[ext_resource type="PackedScene" uid="uid://biwma4nn382lv" path="res://assets/models/pitcher_with_anims.glb" id="1_y4n83"]
+[ext_resource type="PackedScene" uid="uid://flv5nh6opq6o" path="res://assets/prefabs/baseball.tscn" id="2_7qqu3"]
+
+[node name="pitcher_with_anims" instance=ExtResource("1_y4n83")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
+bones/3/rotation = Quaternion(0.254302, -0.493695, -0.481014, 0.678396)
+bones/4/rotation = Quaternion(0.0801498, 0.141949, -0.529138, 0.83273)
+bones/5/rotation = Quaternion(0.533383, -0.335278, -0.442701, 0.638049)
+bones/6/rotation = Quaternion(0.0418967, 0.00146456, 0.101826, 0.993918)
+bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
+bones/10/rotation = Quaternion(0.254302, 0.493695, 0.481014, 0.678396)
+bones/11/rotation = Quaternion(0.0801498, -0.141949, 0.529138, 0.83273)
+bones/12/rotation = Quaternion(0.533383, 0.335278, 0.442702, 0.638049)
+bones/13/rotation = Quaternion(0.0418967, -0.00146456, -0.101826, 0.993918)
+bones/15/scale = Vector3(0.8, 0.8, 0.8)
+
+[node name="BaseballAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.178602, 0.355623, -0.917406, -0.392215, 0.880847, 0.265094, 0.902368, 0.312474, 0.296802, -0.333954, 2.49083, 1.20873)
+bone_name = "pitcher.006.R"
+bone_idx = 13
+
+[node name="Baseball" parent="Armature/Skeleton3D/BaseballAttachment" index="0" instance=ExtResource("2_7qqu3")]
+transform = Transform3D(1, 1.49012e-07, 1.56462e-07, -7.45058e-07, 1, 8.9407e-08, -1.86265e-07, -7.45058e-08, 1, 0.0353413, 0.528146, -0.141266)

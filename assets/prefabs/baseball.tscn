@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://flv5nh6opq6o"]
+
+[ext_resource type="PackedScene" uid="uid://djy5p6yv2fspq" path="res://assets/models/baseball.glb" id="1_f67t4"]
+[ext_resource type="Script" path="res://assets/scripts/baseball.gd" id="1_qiyvh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vmxb7"]
+radius = 0.25
+
+[node name="Baseball" type="RigidBody3D"]
+script = ExtResource("1_qiyvh")
+min_speed = 20.0
+max_speed = 50.0
+
+[node name="model" parent="." instance=ExtResource("1_f67t4")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00116837, 2.98023e-08, -0.00270635)
+shape = SubResource("SphereShape3D_vmxb7")

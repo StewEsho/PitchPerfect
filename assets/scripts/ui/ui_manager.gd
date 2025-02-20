@@ -9,6 +9,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_pitcher_update_pitch_windup(stage: Variant, value: Variant) -> void:
 	$PitchingMeter.update_progress(stage, value)

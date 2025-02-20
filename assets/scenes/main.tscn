@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8w6yc4jlcj3v"]
+[gd_scene load_steps=6 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
 [ext_resource type="Texture2D" uid="uid://bt1eve42277lx" path="res://assets/art/batters_box.png" id="2_8m7o4"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
-[ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="3_6ernd"]
 [ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
 
 [sub_resource type="Environment" id="Environment_6m55l"]
@@ -20,6 +19,7 @@ fog_enabled = true
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.72222)
 environment = SubResource("Environment_6m55l")
+current = true
 fov = 60.0
 
 [node name="background" type="Sprite3D" parent="Camera3D"]
@@ -31,25 +31,58 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.001)
 texture = ExtResource("2_8m7o4")
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
-transform = Transform3D(-0.969321, 0, 0.245798, 0, 1, 0, -0.245798, 0, -0.969321, -0.485404, -0.603749, 0.578837)
+transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974, -0.593952, -0.603749, 0.730923)
+
+[node name="Skeleton3D" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
+bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/3/scale = Vector3(1, 1, 1)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
+bones/10/rotation = Quaternion(0.254302, 0.493695, 0.481014, 0.678396)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(0.0801498, -0.141949, 0.529138, 0.83273)
+bones/12/rotation = Quaternion(0.533383, 0.335278, 0.442702, 0.638049)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0.0418967, -0.00146456, -0.101826, 0.993918)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/rotation = Quaternion(0.375973, 0.648918, 0.597196, -0.28444)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0.474917, -1.70828e-08, -0.116469, 0.87229)
+
+[node name="BaseballAttachment" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.178602, 0.355623, -0.917406, -0.392215, 0.880847, 0.265094, 0.902368, 0.312474, 0.296802, -0.333954, 2.49083, 1.20873)
 
 [node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
-transform = Transform3D(0.471823, -0.170611, -0.865029, 0.340051, 0.940407, 0, 0.813479, -0.294154, 0.501722, 0.842163, -0.292458, 0.482298)
-
-[node name="PitchingHud" parent="." groups=["ui"] instance=ExtResource("2_024tn")]
-script = ExtResource("3_6ernd")
+transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
+visible = false
+script = null
 
 [node name="Lighting" type="Node3D" parent="."]
 
 [node name="sun_light" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 0.332375, 0.943147, 0, -0.943147, 0.332375, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.332375, 0.943147, 0, -0.943147, 0.332375, -0.00217438, 0.0041398, 0.00145891)
 light_color = Color(0.841238, 0.819436, 0.732672, 1)
-light_energy = 0.8
+light_energy = 1.1
+light_indirect_energy = 5.525
+shadow_enabled = true
+shadow_opacity = 0.8
+shadow_blur = 0.0
+
+[node name="ambient_light2" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.34835, -0.0466215, -0.936204, 0.934146, -0.0654243, 0.350843, -0.0776071, -0.996768, 0.0207607, 2.22351, 1.72175, -1.26584)
+light_color = Color(0.513512, 0.858665, 0.89101, 1)
+light_energy = 0.4
 
 [node name="ambient_light" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 0.205794, -0.978595, 0, 0.978595, 0.205794, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.708179, -0.706032, 0, 0.706032, 0.708179, -0.00217438, -0.00309902, 0.00310844)
 light_color = Color(0.32341, 0.631937, 0.322251, 1)
-light_energy = 0.2
+light_energy = 0.4
+
+[node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
-[connection signal="update_pitch_windup" from="Pitcher2" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
+
+[editable path="Pitcher"]
+[editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]

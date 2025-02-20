@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=10 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
+[ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
 [ext_resource type="Texture2D" uid="uid://bf8tmd7rkmu00" path="res://assets/art/ui/pitching_meter_empty.png" id="2_nedva"]
 [ext_resource type="Material" uid="uid://0l7ccbqfacy0" path="res://assets/prefabs/UI/power_meter_mat.tres" id="3_1ekch"]
 [ext_resource type="Texture2D" uid="uid://dwkr0oq50b24l" path="res://assets/art/ui/pitching_meter_full.png" id="4_7uqef"]
@@ -20,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_q6ndl")
 
 [node name="PitchingMeter" type="Container" parent="." groups=["ui"]]
 layout_mode = 1
