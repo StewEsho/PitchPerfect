@@ -81,7 +81,6 @@ transform = Transform3D(1, 0, 0, 0, 0.332375, 0.943147, 0, -0.943147, 0.332375, 
 light_color = Color(0.841238, 0.819436, 0.732672, 1)
 light_energy = 1.1
 light_indirect_energy = 5.525
-shadow_enabled = true
 shadow_opacity = 0.8
 shadow_blur = 0.0
 

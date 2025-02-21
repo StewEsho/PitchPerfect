@@ -1,24 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://p3dhoxkui2wu"]
+[gd_scene load_steps=5 format=3 uid="uid://p3dhoxkui2wu"]
 
 [ext_resource type="PackedScene" uid="uid://ca4nudo5ijfa0" path="res://assets/models/batter.glb" id="1_1hbo4"]
+[ext_resource type="Texture2D" uid="uid://cmamr8hbbiw60" path="res://assets/models/batter_glasses.png" id="2_xau6y"]
+[ext_resource type="Script" path="res://assets/prefabs/bobble.gd" id="2_ybnhr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prm3g"]
+transparency = 1
+albedo_texture = ExtResource("2_xau6y")
 
 [node name="Batter" type="Node3D"]
 
 [node name="model" parent="." instance=ExtResource("1_1hbo4")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("2_ybnhr")
+mag = 0.05
 
 [node name="Skeleton3D" parent="model/Armature" index="0"]
-bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
 bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
+bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
-bones/5/rotation = Quaternion(-0.0668807, -0.0112897, -0.151595, 0.986113)
+bones/5/rotation = Quaternion(-0.0668806, -0.0112897, -0.151595, 0.986113)
+bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0418967, 0.00146455, 0.101826, 0.993918)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.196507, -0.0406961, 0.0205204, 0.979443)
 bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
 bones/10/rotation = Quaternion(-0.0176803, -0.00749904, 0.548988, 0.835609)
-bones/11/rotation = Quaternion(0.057422, -0.0221103, 0.203752, 0.977087)
+bones/10/scale = Vector3(1, 1, 1)
 bones/12/rotation = Quaternion(-0.0668807, 0.0112897, 0.151595, 0.986113)
+bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
-bones/14/scale = Vector3(1, 1, 1)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
+
+[node name="Glasses" parent="model/Armature/Skeleton3D" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_prm3g")
 
 [node name="AnimationPlayer" parent="model" index="1"]
 autoplay = "Idle"

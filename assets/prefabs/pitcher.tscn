@@ -50,7 +50,7 @@ bones/15/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
 bones/15/scale = Vector3(0.8, 0.8, 0.8)
 
 [node name="BaseballAttachment" type="BoneAttachment3D" parent="CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.953149, 0.284774, -0.102035, -0.0869038, 0.065309, 0.994074, 0.28975, 0.956367, -0.0375012, -0.927555, 1.1148, 2.48823)
+transform = Transform3D(-0.953149, 0.284772, -0.102036, -0.086905, 0.0653089, 0.994074, 0.289748, 0.956368, -0.037501, -0.927556, 1.1148, 2.48823)
 bone_name = "pitcher.006.R"
 bone_idx = 13
 

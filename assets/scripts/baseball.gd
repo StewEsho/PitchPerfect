@@ -10,19 +10,21 @@ var initial_position: Vector3
 func _ready() -> void:
 	initial_parent = get_parent()
 	initial_position = position
+	reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_pitched:
 		$model.rotate(
-			Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)), 
+			Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized(), 
 			deg_to_rad(randf_range(-25, 25)))
 
 func reset() -> void:
 	is_pitched = false
 	linear_velocity = Vector3.ZERO
-	get_parent().remove_child(self)
-	initial_parent.add_child(self)
+	if initial_parent != get_parent():
+		get_parent().remove_child.call_deferred(self)
+		initial_parent.add_child.call_deferred(self)
 	position = initial_position
 
 func _on_pitcher_throw_pitch(target: Vector2, power: float, accuracy: float, new_parent: Node3D) -> void:
