@@ -38,7 +38,7 @@ func windup(delta: float, data) -> bool:
 	return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
 
 func throw_pitch_callback() -> void:
-	throw_pitch.emit(Vector2.ZERO, power_pitch.progress, accuracy_pitch.progress, get_parent())
+	throw_pitch.emit(get_viewport().get_mouse_position(), power_pitch.progress, accuracy_pitch.progress, get_parent())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

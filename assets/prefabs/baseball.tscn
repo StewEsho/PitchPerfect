@@ -7,9 +7,10 @@
 radius = 0.25
 
 [node name="Baseball" type="RigidBody3D"]
+gravity_scale = 0.0
 script = ExtResource("1_qiyvh")
-min_speed = 20.0
-max_speed = 50.0
+min_speed = 30.0
+max_speed = 90.0
 
 [node name="model" parent="." instance=ExtResource("1_f67t4")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
