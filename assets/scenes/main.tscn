@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8w6yc4jlcj3v"]
+[gd_scene load_steps=7 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
 [ext_resource type="Texture2D" uid="uid://bt1eve42277lx" path="res://assets/art/batters_box.png" id="2_8m7o4"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
 [ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
+[ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="4_l5hpg"]
 
 [sub_resource type="Environment" id="Environment_6m55l"]
 background_mode = 1
@@ -13,6 +14,8 @@ ambient_light_source = 2
 ambient_light_color = Color(0.270714, 0.504761, 0.765007, 1)
 ambient_light_energy = 0.2
 fog_enabled = true
+fog_light_color = Color(0.547965, 0.659048, 0.844584, 1)
+fog_light_energy = 0.2
 
 [node name="root" type="Node3D"]
 
@@ -23,11 +26,13 @@ current = true
 fov = 60.0
 
 [node name="background" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19209e-07, -9.23893)
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, -36.956)
+billboard = 1
 texture = ExtResource("4_00f4o")
 
 [node name="batters_box" type="Sprite3D" parent="Camera3D/background"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.001)
+billboard = 1
 texture = ExtResource("2_8m7o4")
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
@@ -36,23 +41,33 @@ transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974
 [node name="Skeleton3D" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
+bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
 bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
+bones/5/rotation = Quaternion(-0.0668806, -0.0112897, -0.151595, 0.986113)
 bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(0.0418967, 0.00146455, 0.101826, 0.993918)
 bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(-0.196507, -0.0406961, 0.0205204, 0.979443)
 bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
-bones/10/rotation = Quaternion(0.254302, 0.493695, 0.481014, 0.678396)
+bones/10/rotation = Quaternion(-0.0176803, -0.00749904, 0.548988, 0.835609)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(0.0801498, -0.141949, 0.529138, 0.83273)
-bones/12/rotation = Quaternion(0.533383, 0.335278, 0.442702, 0.638049)
+bones/11/rotation = Quaternion(0.057422, -0.0221103, 0.203752, 0.977087)
+bones/12/rotation = Quaternion(-0.0668807, 0.0112897, 0.151595, 0.986113)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.0418967, -0.00146456, -0.101826, 0.993918)
+bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.375973, 0.648918, 0.597196, -0.28444)
 bones/14/scale = Vector3(1, 1, 1)
-bones/15/rotation = Quaternion(0.474917, -1.70828e-08, -0.116469, 0.87229)
+bones/15/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
+bones/15/scale = Vector3(1, 1, 1)
 
 [node name="BaseballAttachment" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.178602, 0.355623, -0.917406, -0.392215, 0.880847, 0.265094, 0.902368, 0.312474, 0.296802, -0.333954, 2.49083, 1.20873)
+transform = Transform3D(-0.99987, 0.013294, -0.0091002, -0.0134429, -0.999773, 0.016516, -0.00887857, 0.0166362, 0.999822, -1.18303, -0.398432, -0.0693596)
+
+[node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
 
 [node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
 transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
