@@ -6,11 +6,16 @@ signal s_walk()
 const MAX_STRIKES = 3
 const MAX_BALLS = 4
 
+const SCREEN_WIDTH = 720
+
+@export var intro_anim_duration: int = 10  # in frames
+
 var StrikeRects: Array[TextureRect] = []
 var BallRects: Array[TextureRect] = []
 
 var num_strikes: int = 0
 var num_balls: int = 0
+var intro_anim_frame: int = 0
 
 func load_rect(path: String, array: Array) -> void:
 	var tex = load(path)
@@ -48,6 +53,7 @@ func add_ball() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	position.x = SCREEN_WIDTH  # move offscreen
 	for i in range(MAX_STRIKES):
 		load_rect("res://assets/art/ui/bug/bug_s%d.png" % (i + 1), StrikeRects)
 	for i in range(MAX_BALLS):
@@ -64,4 +70,7 @@ func _input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if intro_anim_frame < intro_anim_duration:
+		var t = ease(float(intro_anim_frame) / float(intro_anim_duration), 0.3) # ease out
+		position.x = lerpf(SCREEN_WIDTH, SCREEN_WIDTH - size.x, t)
+		intro_anim_frame += 1
