@@ -78,7 +78,7 @@ transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773,
 
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
-[node name="Crosshair" parent="PitchingHud" index="4"]
+[node name="Crosshair" parent="PitchingHud" index="6"]
 variance = 120.0
 cursor_speed = 1.75
 

@@ -26,6 +26,8 @@ func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 		if meter.has_node("Audio"):
 			meter.get_node("Audio").stop()
 		$ConfirmAudio.play()
+		if randf() < 0.5:
+			$AudioPerfect.play() # TODO: only if we hit Sweetspot (within 0.05)
 	
 	self.stage = stage
 	if stage == POWER_WINDUP_STAGE:
@@ -35,8 +37,9 @@ func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 	else:	
 		meter = null
 	
-	if meter and meter.has_node("Audio"):
-		meter.get_node("Audio").play()
+	if meter:
+		if meter.has_node("Audio"):
+			meter.get_node("Audio").play()
 
 
 func _on_pitcher_reset() -> void:

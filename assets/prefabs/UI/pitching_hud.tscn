@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=36 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/pitching_hud.gdshader" id="6_qlrnj"]
 [ext_resource type="Texture2D" uid="uid://kx4x8rslkpep" path="res://assets/art/ui/pitching_meter_accuracy.png" id="7_1uj1h"]
 [ext_resource type="Texture2D" uid="uid://c5j307ld0rcmo" path="res://assets/art/ui/meter_ticks.png" id="7_e7cc7"]
+[ext_resource type="AudioStream" uid="uid://3ap2tit6ulpc" path="res://assets/audio/sfx/good_range.wav" id="7_wppqt"]
 [ext_resource type="AudioStream" uid="uid://x0lx1yncd7m" path="res://assets/audio/sfx/accuracy_meter.wav" id="8_n3n4p"]
 [ext_resource type="Texture2D" uid="uid://cy6g25qkplk1r" path="res://assets/art/ui/outs/outs_bg.png" id="9_fy0nm"]
 [ext_resource type="Script" path="res://assets/scripts/ui/outs.gd" id="9_qcdqw"]
@@ -387,6 +388,10 @@ volume_db = -2.0
 pitch_scale = 0.8
 attenuation = 0.258816
 
+[node name="AudioPerfect" type="AudioStreamPlayer2D" parent="PitchingMeter"]
+stream = ExtResource("7_wppqt")
+volume_db = 0.8
+
 [node name="Outs" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
@@ -466,10 +471,8 @@ drag_and_drop_selection_enabled = false
 
 [node name="BatterUI" type="AspectRatioContainer" parent="." node_paths=PackedStringArray("percent_text")]
 layout_mode = 0
-offset_left = 720.0
-offset_top = 273.0
-offset_right = 849.0
-offset_bottom = 420.0
+offset_right = 129.0
+offset_bottom = 147.0
 script = ExtResource("18_mod16")
 percent_text = NodePath("../PercentText")
 
