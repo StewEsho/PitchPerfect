@@ -3,6 +3,9 @@ extends Container
 var stage = 0
 var meter: Node2D = null
 
+const POWER_WINDUP_STAGE = 1
+const ACC_WINDUP_STAGE = 2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PitchingMeterPower.material.set_shader_parameter("goingLeft", false)
@@ -18,7 +21,6 @@ func update_progress(amount: float) -> void:
 		return
 	meter.material.set_shader_parameter("progress", amount)	
 
-
 func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 	if meter:
 		if meter.has_node("Audio"):
@@ -26,9 +28,9 @@ func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 		$ConfirmAudio.play()
 	
 	self.stage = stage
-	if stage == 1:
+	if stage == POWER_WINDUP_STAGE:
 		meter = $PitchingMeterPower
-	elif stage == 2:
+	elif stage == ACC_WINDUP_STAGE:
 		meter = $PitchingMeterAccuracy
 	else:	
 		meter = null

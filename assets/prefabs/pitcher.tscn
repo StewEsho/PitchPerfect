@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsr3rm3jjqmrk"]
+[gd_scene load_steps=7 format=3 uid="uid://bsr3rm3jjqmrk"]
 
 [ext_resource type="Script" path="res://assets/scripts/pitcher.gd" id="1_yvpli"]
 [ext_resource type="PackedScene" uid="uid://flv5nh6opq6o" path="res://assets/prefabs/baseball.tscn" id="2_1htfi"]
 [ext_resource type="Script" path="res://assets/prefabs/bobble.gd" id="2_g3tbi"]
 [ext_resource type="PackedScene" uid="uid://biwma4nn382lv" path="res://assets/models/pitcher_with_anims.glb" id="3_j8fcx"]
+[ext_resource type="AudioStream" uid="uid://b2jlyw5jpgids" path="res://assets/audio/sfx/pitch.wav" id="5_7qvtg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lggcv"]
 height = 1.8
@@ -26,8 +27,6 @@ period = 5.0
 [node name="pitcher_model" parent="CharacterBody3D/Bobble" instance=ExtResource("3_j8fcx")]
 
 [node name="Skeleton3D" parent="CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
-bones/0/rotation = Quaternion(0.0420009, 0.038263, -0.0266485, 0.998029)
-bones/1/rotation = Quaternion(0.0129933, 0.0475488, 0.0893389, 0.994781)
 bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
 bones/3/rotation = Quaternion(0.254302, -0.493695, -0.481014, 0.678396)
 bones/3/scale = Vector3(1, 1, 1)
@@ -36,13 +35,13 @@ bones/5/rotation = Quaternion(0.533383, -0.335278, -0.442701, 0.638049)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0418967, 0.00146456, 0.101826, 0.993918)
 bones/6/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.0100528, 0.0279972, 0.704058, 0.70952)
-bones/10/rotation = Quaternion(0.145846, 0.18415, 0.247396, 0.940007)
+bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
+bones/10/rotation = Quaternion(0.254302, 0.493695, 0.481014, 0.678396)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(0.390742, -0.0613799, 0.186517, 0.899314)
-bones/12/rotation = Quaternion(0.24938, 0.347308, 0.146708, 0.892)
+bones/11/rotation = Quaternion(0.0801498, -0.141949, 0.529138, 0.83273)
+bones/12/rotation = Quaternion(0.533383, 0.335278, 0.442702, 0.638049)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.0409422, -0.00132321, -0.102837, 0.993854)
+bones/13/rotation = Quaternion(0.0418967, -0.00146456, -0.101826, 0.993918)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.375973, 0.648918, 0.597196, -0.28444)
 bones/14/scale = Vector3(1, 1, 1)
@@ -50,12 +49,17 @@ bones/15/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
 bones/15/scale = Vector3(0.8, 0.8, 0.8)
 
 [node name="BaseballAttachment" type="BoneAttachment3D" parent="CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.953149, 0.284772, -0.102036, -0.086905, 0.0653089, 0.994074, 0.289748, 0.956368, -0.037501, -0.927556, 1.1148, 2.48823)
+transform = Transform3D(0.178602, 0.355623, -0.917406, -0.392215, 0.880848, 0.265094, 0.902368, 0.312474, 0.296802, -0.333954, 2.49083, 1.20873)
 bone_name = "pitcher.006.R"
 bone_idx = 13
 
 [node name="Baseball" parent="CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D/BaseballAttachment" instance=ExtResource("2_1htfi")]
 transform = Transform3D(1, 1.49012e-07, 1.56462e-07, -7.45058e-07, 1, 8.9407e-08, -1.86265e-07, -7.45058e-08, 1, 0.0353413, 0.528146, -0.141266)
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_7qvtg")
+volume_db = -2.0
+pitch_scale = 1.6
 
 [connection signal="reset" from="." to="." method="_on_reset"]
 [connection signal="reset" from="." to="CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D/BaseballAttachment/Baseball" method="_on_pitcher_reset"]

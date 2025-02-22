@@ -200,6 +200,7 @@ offset = Vector2(120, 51)
 [node name="Audio" type="AudioStreamPlayer2D" parent="PitchingMeter/PitchingMeterPower"]
 stream = ExtResource("8_n3n4p")
 volume_db = 0.8
+pitch_scale = 0.5
 
 [node name="PitchingMeterAccuracy" type="Sprite2D" parent="PitchingMeter"]
 material = SubResource("ShaderMaterial_u5oox")
@@ -216,6 +217,9 @@ offset = Vector2(120, 51)
 
 [node name="ConfirmAudio" type="AudioStreamPlayer2D" parent="PitchingMeter"]
 stream = ExtResource("10_mynlp")
+volume_db = -2.0
+pitch_scale = 0.8
+attenuation = 0.258816
 
 [node name="Outs" type="CenterContainer" parent="."]
 layout_mode = 1

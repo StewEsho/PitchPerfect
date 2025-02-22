@@ -41,7 +41,6 @@ transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974
 
 [node name="Skeleton3D" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
-bones/1/rotation = Quaternion(0, 0, 0, 1)
 bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
 bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
 bones/5/rotation = Quaternion(-0.0668806, -0.0112897, -0.151595, 0.986113)
@@ -92,10 +91,12 @@ variance = 120.0
 cursor_speed = 1.75
 
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
+[connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_new_pitching_stage"]
 [connection signal="request_crosshair_position" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_crosshair_position"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_reset"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_reset"]
-[connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
+[connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/PitchingMeter" method="update_progress"]
+[connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_update_pitch_windup"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
 
 [editable path="Pitcher"]

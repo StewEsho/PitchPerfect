@@ -42,6 +42,7 @@ func windup(delta: float, data) -> bool:
 	return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
 
 func throw_pitch_callback() -> void:
+	$Audio.play()
 	throw_pitch.emit(target_pitch_pos, power_pitch.progress, accuracy_pitch.progress, get_parent())
 
 func update_stage(target_stage):
