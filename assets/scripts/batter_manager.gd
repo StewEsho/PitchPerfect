@@ -3,7 +3,8 @@ extends Node3D
 @export var hitting_odds: Curve
 
 # each batter's sweetspot power % is their number/10
-var batting_order = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# we are mussing 5 here since we'll manually add them first
+var batting_order = [1, 2, 3, 4, 6, 7, 8, 9]
 var curr_index: int = 0
 
 func send_out_batter(num: int) -> void:
@@ -14,8 +15,9 @@ func send_out_batter(num: int) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	# TODO: re-shuffle before 6th innings (after 18 outs)
 	batting_order.shuffle()
+	batting_order.insert(0, 5)
 	print("Batting order: ", batting_order)
 	send_out_batter(batting_order[curr_index])
 
