@@ -35,5 +35,9 @@ func _process(delta: float) -> void:
 	pass
 	
 func _input(event: InputEvent) -> void:
-	if not event.is_echo() and Input.is_key_pressed(KEY_G):
-		$Animator.play("Switch_Batter")
+	pass
+
+func _on_batter_lineup_batter_update(num: int) -> void:
+	current_batter = num
+	$Animator.play("Switch_Batter")
+	percent_text.text = str(num * 10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://p3dhoxkui2wu"]
+[gd_scene load_steps=10 format=3 uid="uid://p3dhoxkui2wu"]
 
 [ext_resource type="PackedScene" uid="uid://ca4nudo5ijfa0" path="res://assets/models/batter.glb" id="1_1hbo4"]
 [ext_resource type="Script" path="res://assets/prefabs/batter.gd" id="1_dpwkd"]
@@ -9,6 +9,152 @@
 transparency = 1
 albedo_texture = ExtResource("2_xau6y")
 
+[sub_resource type="Animation" id="Animation_f8tl6"]
+resource_name = "enter"
+length = 1.0
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(5, -0.25, 0, 0.2, -8.56128, 0, -0.5, 1.10686, 0.25, 0),
+"times": PackedFloat32Array(0, 0.966667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_gjs6d"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_41dyb"]
+resource_name = "exit"
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.0333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.383333, -3.56128, 5, -0.333333, 9.86559, 0.25, 0),
+"times": PackedFloat32Array(0, 0.966667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_afg3c"]
+_data = {
+"RESET": SubResource("Animation_gjs6d"),
+"enter": SubResource("Animation_f8tl6"),
+"exit": SubResource("Animation_41dyb")
+}
+
 [node name="Batter" type="Node3D"]
 script = ExtResource("1_dpwkd")
 
@@ -18,27 +164,34 @@ script = ExtResource("2_ybnhr")
 mag = 0.05
 
 [node name="Skeleton3D" parent="model/Armature" index="0"]
+bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
 bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
-bones/5/rotation = Quaternion(-0.0668806, -0.0112897, -0.151595, 0.986113)
+bones/5/rotation = Quaternion(-0.0668807, -0.0112897, -0.151595, 0.986113)
 bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0418967, 0.00146455, 0.101826, 0.993918)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.196507, -0.0406961, 0.0205204, 0.979443)
 bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
 bones/10/rotation = Quaternion(-0.0176803, -0.00749904, 0.548988, 0.835609)
 bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(0.057422, -0.0221103, 0.203752, 0.977087)
 bones/12/rotation = Quaternion(-0.0668807, 0.0112897, 0.151595, 0.986113)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
+bones/14/scale = Vector3(1, 1, 1)
 
 [node name="Glasses" parent="model/Armature/Skeleton3D" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_prm3g")
 
 [node name="AnimationPlayer" parent="model" index="1"]
 autoplay = "Idle"
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_afg3c")
+}
 
 [editable path="model"]

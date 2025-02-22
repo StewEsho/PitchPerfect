@@ -471,8 +471,10 @@ drag_and_drop_selection_enabled = false
 
 [node name="BatterUI" type="AspectRatioContainer" parent="." node_paths=PackedStringArray("percent_text")]
 layout_mode = 0
-offset_right = 129.0
-offset_bottom = 147.0
+offset_left = 720.0
+offset_top = 273.0
+offset_right = 849.0
+offset_bottom = 420.0
 script = ExtResource("18_mod16")
 percent_text = NodePath("../PercentText")
 

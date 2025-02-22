@@ -7,7 +7,8 @@ signal reset()
 signal request_crosshair_position()
 signal request_aim_range()
 
-@export var pitch_progress_time: float = 1.0 # number of seconds to reach full power
+@export var power_duration: float = 1.5 # number of seconds to reach full power
+@export var accuracy_duration: float = 1.0
 @export var baseball_asset: PackedScene
 
 enum PitchStage {WAIT, WINDUP_1, WINDUP_2, PITCHING, POST_PITCH}
@@ -33,8 +34,8 @@ var animplayer: AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	power_pitch.time_to_swing = pitch_progress_time
-	accuracy_pitch.time_to_swing = pitch_progress_time
+	power_pitch.time_to_swing = power_duration
+	accuracy_pitch.time_to_swing = accuracy_duration
 	accuracy_pitch.progress = 0.05  # start with a little bit in the tank
 	if $CharacterBody3D/Bobble/pitcher_model.has_node("AnimationPlayer"):
 		animplayer = $CharacterBody3D/Bobble/pitcher_model/AnimationPlayer;

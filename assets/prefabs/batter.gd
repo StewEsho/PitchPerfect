@@ -1,6 +1,7 @@
 extends Node3D
 
 @export_range(1, 9) var jersey_num: int = 2
+var is_ready: bool = true
 
 func update_jersey_tex() -> void:
 	# we change it on the fly . . .
@@ -13,4 +14,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	is_ready = !$Animator.is_playing()

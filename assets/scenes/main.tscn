@@ -86,7 +86,6 @@ cursor_speed = 1.75
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
 
 [node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
 visible = false
 
 [node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
@@ -104,6 +103,7 @@ script = null
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_update_pitch_windup"]
 [connection signal="aim_range_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_aim_range_response"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
+[connection signal="batter_update" from="BatterLineup" to="PitchingHud/BatterUI" method="_on_batter_lineup_batter_update"]
 
 [editable path="Pitcher"]
 [editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]
