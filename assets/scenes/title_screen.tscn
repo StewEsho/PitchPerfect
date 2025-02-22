@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://biejgv3b13bod"]
+
+[ext_resource type="Texture2D" uid="uid://ce0vp1nhd3k63" path="res://assets/art/ui/title_screen/title_screen_bg.png" id="1_plxv3"]
+[ext_resource type="Texture2D" uid="uid://buvdds1nsshou" path="res://assets/art/ui/title_screen/title_screen_render.png" id="2_loxwo"]
+[ext_resource type="Script" path="res://assets/scenes/title_screen_render.gd" id="3_yikcu"]
+[ext_resource type="Texture2D" uid="uid://6k3lrwynomrk" path="res://assets/art/ui/title_screen/title_screen_continue.png" id="4_r8qkh"]
+[ext_resource type="Script" path="res://assets/scenes/title_screen_continue.gd" id="5_rkwvt"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreenBg" type="Sprite2D" parent="."]
+position = Vector2(360, 270)
+texture = ExtResource("1_plxv3")
+
+[node name="TitleScreenRender" type="Sprite2D" parent="."]
+position = Vector2(360, 270)
+texture = ExtResource("2_loxwo")
+script = ExtResource("3_yikcu")
+
+[node name="TitleScreenContinue" type="Sprite2D" parent="."]
+position = Vector2(362, 271)
+texture = ExtResource("4_r8qkh")
+script = ExtResource("5_rkwvt")
+blink_duration = 0.5

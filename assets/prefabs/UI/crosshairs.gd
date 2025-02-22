@@ -1,6 +1,7 @@
 extends Sprite2D
 
 signal crosshair_position_response(pos: Vector2)
+signal aim_range_response(range: float)
 
 const POWER_WINDUP_STAGE = 1
 const ACC_WINDUP_STAGE = 2
@@ -61,6 +62,9 @@ func _on_pitcher_request_crosshair_position() -> void:
 	crosshair_position_response.emit(position)
 	Input.set_custom_mouse_cursor(mouse_cursor_dot)
 
+func _on_pitcher_request_aim_range() -> void:
+	aim_range_response.emit(aim_range)
+
 func _on_pitcher_reset() -> void:
 	set_variance(variance)  # to setup side-effects
 	set_aim_range(variance)
@@ -74,7 +78,8 @@ func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 	pitching_stage = stage
 	
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, aim_range, Color(Color.AQUA, 0.25), true, -1, true)
+	if pitching_stage <= 3: # Pitching; stop showing post-
+		draw_circle(Vector2.ZERO, aim_range, Color(Color.AQUA, 0.25), true, -1, true)
 
 func _on_pitcher_update_pitch_windup(value: Variant) -> void:
 	if pitching_stage == 2:  # accuracy windup

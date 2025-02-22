@@ -59,6 +59,24 @@ transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773,
 [node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
 
+[node name="Skeleton3D" parent="Batter/model/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.00478651, -0.0726968, 0.0138452, 0.997247)
+bones/1/rotation = Quaternion(-0.0797918, -0.707438, -0.0843615, 0.697172)
+bones/2/rotation = Quaternion(0.144048, -0.175323, -0.607729, 0.761037)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.161166, 0.0619143, -0.313652, 0.93371)
+bones/4/rotation = Quaternion(-0.00746991, -0.164652, 0.00852183, 0.986287)
+bones/5/rotation = Quaternion(-0.0431788, 0.0275424, 0.0203797, 0.99848)
+bones/6/rotation = Quaternion(-0.165853, -0.429114, 0.0988676, 0.882371)
+bones/7/rotation = Quaternion(0.0348875, 0.0727618, 0.128277, 0.98845)
+bones/8/rotation = Quaternion(0.569098, 0.0140978, -0.154286, 0.807542)
+bones/9/rotation = Quaternion(0.311901, 0.298361, 0.663068, 0.611588)
+bones/10/rotation = Quaternion(0.542427, 0.190508, 0.502972, 0.645367)
+bones/11/rotation = Quaternion(-0.026637, 0.14942, 0.0936365, 0.98397)
+bones/12/rotation = Quaternion(0.0880856, 0.153685, 0.0796769, 0.980955)
+bones/13/rotation = Quaternion(-0.000894341, -0.0051198, -0.00171546, 0.999985)
+bones/14/scale = Vector3(1, 1, 1)
+
 [node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
 transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
 visible = false
@@ -92,13 +110,17 @@ cursor_speed = 1.75
 
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_new_pitching_stage"]
+[connection signal="request_aim_range" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_aim_range"]
 [connection signal="request_crosshair_position" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_crosshair_position"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_reset"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_reset"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/PitchingMeter" method="update_progress"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_update_pitch_windup"]
+[connection signal="aim_range_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_aim_range_response"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
 
 [editable path="Pitcher"]
 [editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]
+[editable path="Batter"]
+[editable path="Batter/model"]
 [editable path="PitchingHud"]
