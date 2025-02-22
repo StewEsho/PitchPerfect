@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8w6yc4jlcj3v"]
+[gd_scene load_steps=8 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
 [ext_resource type="Texture2D" uid="uid://bt1eve42277lx" path="res://assets/art/batters_box.png" id="2_8m7o4"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
 [ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
 [ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="4_l5hpg"]
+[ext_resource type="PackedScene" uid="uid://crcjbowhm0vo8" path="res://assets/prefabs/batter_lineup.tscn" id="6_bf2r0"]
 
 [sub_resource type="Environment" id="Environment_6m55l"]
 background_mode = 1
@@ -18,6 +19,26 @@ fog_light_color = Color(0.547965, 0.659048, 0.844584, 1)
 fog_light_energy = 0.2
 
 [node name="root" type="Node3D"]
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="sun_light" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.332375, 0.943147, 0, -0.943147, 0.332375, -0.00217438, 0.0041398, 0.00145891)
+light_color = Color(0.841238, 0.819436, 0.732672, 1)
+light_energy = 1.1
+light_indirect_energy = 5.525
+shadow_opacity = 0.8
+shadow_blur = 0.0
+
+[node name="ambient_light2" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.34835, -0.0466215, -0.936204, 0.934146, -0.0654243, 0.350843, -0.0776071, -0.996768, 0.0207607, 2.22351, 1.72175, -1.26584)
+light_color = Color(0.513512, 0.858665, 0.89101, 1)
+light_energy = 0.4
+
+[node name="ambient_light" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.708179, -0.706032, 0, 0.706032, 0.708179, -0.00217438, -0.00309902, 0.00310844)
+light_color = Color(0.32341, 0.631937, 0.322251, 1)
+light_energy = 0.4
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.72222)
@@ -55,55 +76,23 @@ bones/15/scale = Vector3(1, 1, 1)
 [node name="BaseballAttachment" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
 transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773, 0.016516, -0.00887861, 0.0166362, 0.999822, -1.18303, -0.398432, -0.0693596)
 
-[node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
-
-[node name="Skeleton3D" parent="Batter/model/Armature" index="0"]
-bones/0/rotation = Quaternion(-0.00478651, -0.0726968, 0.0138452, 0.997247)
-bones/1/rotation = Quaternion(-0.0797918, -0.707438, -0.0843615, 0.697172)
-bones/2/rotation = Quaternion(0.144048, -0.175323, -0.607729, 0.761037)
-bones/3/rotation = Quaternion(0.161166, 0.0619143, -0.313652, 0.93371)
-bones/4/rotation = Quaternion(-0.00746991, -0.164652, 0.00852183, 0.986287)
-bones/5/rotation = Quaternion(-0.0431788, 0.0275424, 0.0203797, 0.99848)
-bones/6/rotation = Quaternion(-0.165853, -0.429114, 0.0988676, 0.882371)
-bones/7/rotation = Quaternion(0.0348875, 0.0727618, 0.128277, 0.98845)
-bones/8/rotation = Quaternion(0.569098, 0.0140978, -0.154286, 0.807542)
-bones/9/rotation = Quaternion(0.311901, 0.298361, 0.663068, 0.611588)
-bones/10/rotation = Quaternion(0.542427, 0.190508, 0.502972, 0.645367)
-bones/11/rotation = Quaternion(-0.026637, 0.14942, 0.0936365, 0.98397)
-bones/12/rotation = Quaternion(0.0880856, 0.153685, 0.0796769, 0.980955)
-bones/13/rotation = Quaternion(-0.000894341, -0.0051198, -0.00171546, 0.999985)
-
-[node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
-transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
-visible = false
-script = null
-
-[node name="Lighting" type="Node3D" parent="."]
-
-[node name="sun_light" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 0.332375, 0.943147, 0, -0.943147, 0.332375, -0.00217438, 0.0041398, 0.00145891)
-light_color = Color(0.841238, 0.819436, 0.732672, 1)
-light_energy = 1.1
-light_indirect_energy = 5.525
-shadow_opacity = 0.8
-shadow_blur = 0.0
-
-[node name="ambient_light2" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(0.34835, -0.0466215, -0.936204, 0.934146, -0.0654243, 0.350843, -0.0776071, -0.996768, 0.0207607, 2.22351, 1.72175, -1.26584)
-light_color = Color(0.513512, 0.858665, 0.89101, 1)
-light_energy = 0.4
-
-[node name="ambient_light" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 0.708179, -0.706032, 0, 0.706032, 0.708179, -0.00217438, -0.00309902, 0.00310844)
-light_color = Color(0.32341, 0.631937, 0.322251, 1)
-light_energy = 0.4
-
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
 [node name="Crosshair" parent="PitchingHud" index="4"]
 variance = 120.0
 cursor_speed = 1.75
+
+[node name="BatterLineup" parent="." instance=ExtResource("6_bf2r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
+
+[node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
+visible = false
+
+[node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
+transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
+visible = false
+script = null
 
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_new_pitching_stage"]
@@ -118,6 +107,4 @@ cursor_speed = 1.75
 
 [editable path="Pitcher"]
 [editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]
-[editable path="Batter"]
-[editable path="Batter/model"]
 [editable path="PitchingHud"]

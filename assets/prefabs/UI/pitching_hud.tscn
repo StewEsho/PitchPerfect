@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=26 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
 [ext_resource type="Shader" path="res://assets/pitching_hud.gdshader" id="6_qlrnj"]
 [ext_resource type="Texture2D" uid="uid://kx4x8rslkpep" path="res://assets/art/ui/pitching_meter_accuracy.png" id="7_1uj1h"]
+[ext_resource type="Texture2D" uid="uid://c5j307ld0rcmo" path="res://assets/art/ui/meter_ticks.png" id="7_e7cc7"]
 [ext_resource type="AudioStream" uid="uid://x0lx1yncd7m" path="res://assets/audio/sfx/accuracy_meter.wav" id="8_n3n4p"]
 [ext_resource type="Texture2D" uid="uid://cy6g25qkplk1r" path="res://assets/art/ui/outs/outs_bg.png" id="9_fy0nm"]
 [ext_resource type="Script" path="res://assets/scripts/ui/outs.gd" id="9_qcdqw"]
@@ -201,6 +202,10 @@ offset = Vector2(120, 51)
 stream = ExtResource("8_n3n4p")
 volume_db = 0.8
 pitch_scale = 0.5
+
+[node name="PitchingMeterTicks" type="Sprite2D" parent="PitchingMeter"]
+texture = ExtResource("7_e7cc7")
+offset = Vector2(120, 51)
 
 [node name="PitchingMeterAccuracy" type="Sprite2D" parent="PitchingMeter"]
 material = SubResource("ShaderMaterial_u5oox")

@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://crcjbowhm0vo8"]
+
+[ext_resource type="Script" path="res://assets/scripts/batter_manager.gd" id="1_3tfw2"]
+[ext_resource type="Curve" path="res://assets/prefabs/hitting_odds.seab2" id="2_u5d6l"]
+[ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="3_67rgf"]
+
+[node name="BatterLineup" type="Node3D"]
+script = ExtResource("1_3tfw2")
+hitting_odds = ExtResource("2_u5d6l")
+
+[node name="Batter1" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter2" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter3" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter4" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter5" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter6" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter7" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter8" parent="." instance=ExtResource("3_67rgf")]
+visible = false
+
+[node name="Batter9" parent="." instance=ExtResource("3_67rgf")]
+visible = false
