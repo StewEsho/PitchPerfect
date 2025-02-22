@@ -42,30 +42,20 @@ transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974
 [node name="Skeleton3D" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
 bones/1/rotation = Quaternion(0, 0, 0, 1)
-bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
 bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
-bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
 bones/5/rotation = Quaternion(-0.0668806, -0.0112897, -0.151595, 0.986113)
-bones/5/scale = Vector3(1, 1, 1)
 bones/6/rotation = Quaternion(0.0418967, 0.00146455, 0.101826, 0.993918)
-bones/6/scale = Vector3(1, 1, 1)
 bones/7/rotation = Quaternion(-0.196507, -0.0406961, 0.0205204, 0.979443)
 bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
 bones/10/rotation = Quaternion(-0.0176803, -0.00749904, 0.548988, 0.835609)
-bones/10/scale = Vector3(1, 1, 1)
 bones/11/rotation = Quaternion(0.057422, -0.0221103, 0.203752, 0.977087)
 bones/12/rotation = Quaternion(-0.0668807, 0.0112897, 0.151595, 0.986113)
-bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
-bones/13/scale = Vector3(1, 1, 1)
-bones/14/rotation = Quaternion(0.375973, 0.648918, 0.597196, -0.28444)
-bones/14/scale = Vector3(1, 1, 1)
-bones/15/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
 bones/15/scale = Vector3(1, 1, 1)
 
 [node name="BaseballAttachment" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.99987, 0.013294, -0.0091002, -0.0134429, -0.999773, 0.016516, -0.00887857, 0.0166362, 0.999822, -1.18303, -0.398432, -0.0693596)
+transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773, 0.016516, -0.00887861, 0.0166362, 0.999822, -1.18303, -0.398432, -0.0693596)
 
 [node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
@@ -97,7 +87,19 @@ light_energy = 0.4
 
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
+[node name="Crosshair" parent="PitchingHud" index="4"]
+variance = 120.0
+cursor_speed = 1.75
+
+[node name="AudioStreamPlayer2D" parent="PitchingHud/Crosshair" index="0"]
+volume_db = 0.0
+pitch_scale = 0.8
+
+[connection signal="request_crosshair_position" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_crosshair_position"]
+[connection signal="reset" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_reset"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
+[connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
 
 [editable path="Pitcher"]
 [editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]
+[editable path="PitchingHud"]

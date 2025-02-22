@@ -20,4 +20,5 @@ func _draw():
 	# todo: pass in variance to the crosshairs script
 	#  likely need a seperate script to handle all of this,
 	#  or, just have a way to send from crosshairs back here
-	draw_circle(get_viewport().get_mouse_position(), 100, Color(Color.AQUA, 0.25), true, -1, true)
+	if $Crosshair.is_crosshair_shaking:
+		draw_circle(get_viewport().get_mouse_position(), crosshairs_variance, Color(Color.AQUA, 0.25), true, -1, true)

@@ -3,6 +3,7 @@ extends Node3D
 signal update_pitch_windup(stage, value)
 signal throw_pitch(target: Vector2, power: float, accuracy: float, parent: Node3D)
 signal reset()
+signal request_crosshair_position()
 
 @export var pitch_progress_time: float = 1.0 # number of seconds to reach full power
 @export var baseball_asset: PackedScene
@@ -10,6 +11,8 @@ signal reset()
 enum PitchStage {WAIT, WINDUP_1, WINDUP_2, PITCHING, POST_PITCH}
 var pitch_stage: PitchStage = PitchStage.WAIT
 var target_stage = pitch_stage
+
+var target_pitch_pos: Vector2 = Vector2.ZERO
 
 class PitchData:
 	var stage: PitchStage
@@ -38,7 +41,7 @@ func windup(delta: float, data) -> bool:
 	return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
 
 func throw_pitch_callback() -> void:
-	throw_pitch.emit(get_viewport().get_mouse_position(), power_pitch.progress, accuracy_pitch.progress, get_parent())
+	throw_pitch.emit(target_pitch_pos, power_pitch.progress, accuracy_pitch.progress, get_parent())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -58,6 +61,8 @@ func _process(delta: float) -> void:
 			if (windup(delta, accuracy_pitch)):
 				print("Acc: [%f]" % accuracy_pitch.progress)
 				target_stage = PitchStage.PITCHING
+				# we then listen for `crosshair_position_response` signal
+				request_crosshair_position.emit()
 				if animplayer:
 					animplayer.stop()
 					animplayer.play("Underhand" if power_pitch.progress < 0.5 else "Pitch");
@@ -75,3 +80,6 @@ func _on_reset() -> void:
 	update_pitch_windup.emit(1, power_pitch.progress)
 	update_pitch_windup.emit(2, accuracy_pitch.progress)
 	target_stage = PitchStage.WAIT
+
+func _on_crosshair_crosshair_position_response(pos: Vector2) -> void:
+	target_pitch_pos = pos

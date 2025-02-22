@@ -268,9 +268,10 @@ z_index = 3
 texture = ExtResource("15_sap3t")
 script = ExtResource("16_yydo5")
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="Crosshair"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Crosshair"]
 stream = ExtResource("17_rpurk")
 volume_db = 1.0
+autoplay = true
 max_distance = 1e+07
 panning_strength = 0.0
 playback_type = 1
