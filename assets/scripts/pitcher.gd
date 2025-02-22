@@ -1,6 +1,7 @@
 extends Node3D
 
-signal update_pitch_windup(stage, value)
+signal new_pitching_stage(stage)
+signal update_pitch_windup(value)
 signal throw_pitch(target: Vector2, power: float, accuracy: float, parent: Node3D)
 signal reset()
 signal request_crosshair_position()
@@ -36,12 +37,18 @@ func _ready() -> void:
 
 func windup(delta: float, data) -> bool:
 	data.progress += minf(delta / data.time_to_swing, 1.0)
-	update_pitch_windup.emit(pitch_stage, data.progress)
+	update_pitch_windup.emit(data.progress)
 	# return true to stop progress
 	return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
 
 func throw_pitch_callback() -> void:
 	throw_pitch.emit(target_pitch_pos, power_pitch.progress, accuracy_pitch.progress, get_parent())
+
+func update_stage(target_stage):
+	if pitch_stage == target_stage:
+		return
+	pitch_stage = target_stage
+	new_pitching_stage.emit(pitch_stage)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,12 +64,12 @@ func _process(delta: float) -> void:
 			if (windup(delta, power_pitch)):
 				print("Power: [%f]" % power_pitch.progress)
 				target_stage = PitchStage.WINDUP_2
+				request_crosshair_position.emit()
 		PitchStage.WINDUP_2:
 			if (windup(delta, accuracy_pitch)):
 				print("Acc: [%f]" % accuracy_pitch.progress)
 				target_stage = PitchStage.PITCHING
 				# we then listen for `crosshair_position_response` signal
-				request_crosshair_position.emit()
 				if animplayer:
 					animplayer.stop()
 					animplayer.play("Underhand" if power_pitch.progress < 0.5 else "Pitch");
@@ -71,14 +78,13 @@ func _process(delta: float) -> void:
 				reset.emit()
 		_:
 			print("undefined behavior")
-	pitch_stage = target_stage
+		
+	update_stage(target_stage)
 
 
 func _on_reset() -> void:
 	power_pitch.progress = 0
 	accuracy_pitch.progress = 0
-	update_pitch_windup.emit(1, power_pitch.progress)
-	update_pitch_windup.emit(2, accuracy_pitch.progress)
 	target_stage = PitchStage.WAIT
 
 func _on_crosshair_crosshair_position_response(pos: Vector2) -> void:

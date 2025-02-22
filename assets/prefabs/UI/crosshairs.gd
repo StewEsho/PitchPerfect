@@ -13,6 +13,9 @@ var is_crosshair_shaking: bool = true
 	
 var astream: AudioStreamPlayer2D
 
+var mouse_cursor_dot = preload("res://assets/art/crosshair_cursor_dot.png")
+var mouse_cursor_empty = preload("res://assets/art/crosshair_cursor_empty.png")
+
 func set_variance(v: float) -> void:
 	# so that we can draw our variance circle
 	variance = v
@@ -21,8 +24,8 @@ func set_variance(v: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	set_variance(variance)  # to setup side-effects
 	astream = $Audio
+	_on_pitcher_reset()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -32,8 +35,6 @@ func _process(delta: float) -> void:
 		elif astream.playing:
 			astream.stop()
 		return
-	elif !astream.playing:
-		astream.play()
 	
 	target_pos = get_viewport().get_mouse_position()
 	var x = cursor_speed * (Time.get_ticks_msec() / 1000.0)
@@ -51,8 +52,12 @@ func _process(delta: float) -> void:
 func _on_pitcher_request_crosshair_position() -> void:
 	is_crosshair_shaking = false
 	crosshair_position_response.emit(position)
+	Input.set_custom_mouse_cursor(mouse_cursor_dot)
 
 func _on_pitcher_reset() -> void:
+	set_variance(variance)  # to setup side-effects
 	is_crosshair_shaking = true
 	cos_x_salt = randfn(0, 2.0 * PI)
 	sin_x_salt = randfn(0, 2.0 * PI)
+	Input.set_custom_mouse_cursor(mouse_cursor_empty)
+	astream.play()

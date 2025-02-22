@@ -91,11 +91,9 @@ light_energy = 0.4
 variance = 120.0
 cursor_speed = 1.75
 
-[node name="AudioStreamPlayer2D" parent="PitchingHud/Crosshair" index="0"]
-volume_db = 0.0
-pitch_scale = 0.8
-
+[connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
 [connection signal="request_crosshair_position" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_crosshair_position"]
+[connection signal="reset" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_reset"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_reset"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud" method="_on_pitcher_update_pitch_windup"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]

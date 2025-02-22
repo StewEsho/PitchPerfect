@@ -10,8 +10,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	queue_redraw()
 
-func _on_pitcher_update_pitch_windup(stage: Variant, value: Variant) -> void:
-	$PitchingMeter.update_progress(stage, value)
+func _on_pitcher_update_pitch_windup(value: Variant) -> void:
+	$PitchingMeter.update_progress(value)
 
 func set_crosshairs_variance(variance: float) -> void:
 	crosshairs_variance = variance
@@ -21,4 +21,4 @@ func _draw():
 	#  likely need a seperate script to handle all of this,
 	#  or, just have a way to send from crosshairs back here
 	if $Crosshair.is_crosshair_shaking:
-		draw_circle(get_viewport().get_mouse_position(), crosshairs_variance, Color(Color.AQUA, 0.25), true, -1, true)
+		draw_circle($Crosshair.position, crosshairs_variance, Color(Color.AQUA, 0.25), true, -1, true)
