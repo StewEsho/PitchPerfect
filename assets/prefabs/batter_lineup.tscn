@@ -10,27 +10,35 @@ hitting_odds = ExtResource("2_u5d6l")
 
 [node name="Batter1" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 1
 
 [node name="Batter2" parent="." instance=ExtResource("3_67rgf")]
 visible = false
 
 [node name="Batter3" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 3
 
 [node name="Batter4" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 4
 
 [node name="Batter5" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 5
 
 [node name="Batter6" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 6
 
 [node name="Batter7" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 7
 
 [node name="Batter8" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 8
 
 [node name="Batter9" parent="." instance=ExtResource("3_67rgf")]
 visible = false
+jersey_num = 9

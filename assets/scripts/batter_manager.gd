@@ -8,10 +8,13 @@ var curr_index: int = 0
 
 func send_out_batter(num: int) -> void:
 	get_child(batting_order[curr_index] - 1).visible = false
-	get_child(num - 1).visible = true
+	var batter = get_child(num-1)
+	batter.visible = true
+	batter.update_jersey_tex()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	batting_order.shuffle()
 	print("Batting order: ", batting_order)
 	send_out_batter(batting_order[curr_index])

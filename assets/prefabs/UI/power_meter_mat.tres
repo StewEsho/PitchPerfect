@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://0l7ccbqfacy0"]
 
-[ext_resource type="Shader" path="res://assets/pitching_hud.gdshader" id="1_1jv4i"]
+[ext_resource type="Shader" path="res://assets/shaders/pitching_hud.gdshader" id="1_1jv4i"]
 
 [resource]
 shader = ExtResource("1_1jv4i")

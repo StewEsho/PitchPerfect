@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://0l7ccbqfacy0" path="res://assets/prefabs/UI/power_meter_mat.tres" id="3_1ekch"]
 [ext_resource type="Texture2D" uid="uid://dwkr0oq50b24l" path="res://assets/art/ui/pitching_meter_full.png" id="4_7uqef"]
 [ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
-[ext_resource type="Shader" path="res://assets/pitching_hud.gdshader" id="6_qlrnj"]
+[ext_resource type="Shader" path="res://assets/shaders/pitching_hud.gdshader" id="6_qlrnj"]
 [ext_resource type="Texture2D" uid="uid://kx4x8rslkpep" path="res://assets/art/ui/pitching_meter_accuracy.png" id="7_1uj1h"]
 [ext_resource type="Texture2D" uid="uid://c5j307ld0rcmo" path="res://assets/art/ui/meter_ticks.png" id="7_e7cc7"]
 [ext_resource type="AudioStream" uid="uid://x0lx1yncd7m" path="res://assets/audio/sfx/accuracy_meter.wav" id="8_n3n4p"]
