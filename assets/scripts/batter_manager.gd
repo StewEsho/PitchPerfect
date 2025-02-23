@@ -84,4 +84,5 @@ func _on_batter_hits_ball() -> void:
 	baseball_hit.emit()
 
 func _on_umpire_set_outs_num(num: int) -> void:
-	send_out_next_batter()
+	if num < 9: # max outs
+		send_out_next_batter()

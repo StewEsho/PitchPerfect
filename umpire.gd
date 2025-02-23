@@ -14,7 +14,7 @@ signal batter_hit(y_relative: float)
 
 const max_strikes = 3
 const max_balls = 4
-const max_outs = 27
+const max_outs = 9
 
 var batting_box_bounds: Rect2
 var num_strikes := 0

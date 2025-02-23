@@ -2,7 +2,7 @@ extends CenterContainer
 
 signal s_max_outs
 
-const MAX_OUTS: int = 27
+const MAX_OUTS: int = 9
 var rects: Array[TextureRect] = []
 var num_outs: int = 0
 

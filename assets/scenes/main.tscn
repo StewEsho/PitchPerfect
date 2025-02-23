@@ -71,17 +71,7 @@ transform = Transform3D(-0.99987, 0.0132954, -0.00910025, -0.0134444, -0.999773,
 
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
-[node name="PitchingMeter" parent="PitchingHud" index="1"]
-offset_left = -720.0
-offset_top = -540.0
-offset_right = -494.0
-offset_bottom = -432.0
-
 [node name="BatterUI" parent="PitchingHud" index="5" node_paths=PackedStringArray("batting_lineup")]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 129.0
-offset_bottom = 147.0
 batting_lineup = NodePath("../../BatterLineup")
 
 [node name="Crosshair" parent="PitchingHud" index="7"]
