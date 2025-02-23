@@ -105,7 +105,6 @@ func _process(delta: float) -> void:
 				_on_reset()
 		PitchStage.GAME_OVER:
 			if Input.is_action_just_pressed("pitch"):
-				print("pressed pitch: %d" % has_pressed_pitch_yet)
 				reset.emit()
 		_:
 			print("undefined behavior")
