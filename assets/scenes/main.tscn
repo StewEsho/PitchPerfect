@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
-[ext_resource type="Texture2D" uid="uid://bt1eve42277lx" path="res://assets/art/batters_box.png" id="2_8m7o4"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
 [ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
 [ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="4_l5hpg"]
 [ext_resource type="PackedScene" uid="uid://crcjbowhm0vo8" path="res://assets/prefabs/batter_lineup.tscn" id="6_bf2r0"]
+[ext_resource type="PackedScene" uid="uid://d1nqle1da70ne" path="res://assets/prefabs/umpire.tscn" id="7_klnnu"]
 
 [sub_resource type="Environment" id="Environment_6m55l"]
 background_mode = 1
@@ -40,22 +40,16 @@ transform = Transform3D(1, 0, 0, 0, 0.708179, -0.706032, 0, 0.706032, 0.708179, 
 light_color = Color(0.32341, 0.631937, 0.322251, 1)
 light_energy = 0.4
 
+[node name="background" type="Sprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 3.9667, 0.515044, 0, -0.515044, 3.9667, 0, -3.98985, -34.9261)
+billboard = 1
+texture = ExtResource("4_00f4o")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.991676, 0.128761, 0, -0.128761, 0.991676, 0, 0.768638, 1.72222)
 environment = SubResource("Environment_6m55l")
 current = true
 fov = 60.0
-
-[node name="background" type="Sprite3D" parent="Camera3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, -36.956)
-billboard = 1
-texture = ExtResource("4_00f4o")
-
-[node name="batters_box" type="Sprite3D" parent="Camera3D/background"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.001)
-billboard = 1
-no_depth_test = true
-texture = ExtResource("2_8m7o4")
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
 transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974, -0.593952, -0.603749, 0.730923)
@@ -78,7 +72,10 @@ transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773,
 
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
-[node name="Crosshair" parent="PitchingHud" index="6"]
+[node name="BatterUI" parent="PitchingHud" index="5" node_paths=PackedStringArray("batting_lineup")]
+batting_lineup = NodePath("../../BatterLineup")
+
+[node name="Crosshair" parent="PitchingHud" index="7"]
 variance = 120.0
 cursor_speed = 1.75
 
@@ -93,12 +90,18 @@ transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0
 visible = false
 script = null
 
+[node name="Umpire" parent="." node_paths=PackedStringArray("pitcher", "batter_lineup", "batting_box") instance=ExtResource("7_klnnu")]
+pitcher = NodePath("../Pitcher")
+batter_lineup = NodePath("../BatterLineup")
+batting_box = NodePath("../PitchingHud/BattersBox")
+
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_new_pitching_stage"]
 [connection signal="request_aim_range" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_aim_range"]
 [connection signal="request_crosshair_position" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_crosshair_position"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_reset"]
 [connection signal="reset" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_reset"]
+[connection signal="throw_pitch" from="Pitcher" to="Umpire" method="process_pitch"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/PitchingMeter" method="update_progress"]
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_update_pitch_windup"]
 [connection signal="aim_range_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_aim_range_response"]

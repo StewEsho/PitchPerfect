@@ -2,12 +2,16 @@ extends Node3D
 
 signal batter_update(num: int)
 
-@export var hitting_odds: Curve
-
 # each batter's sweetspot power % is their number/10
 # we are mussing 5 here since we'll manually add them first
 var batting_order = [1, 2, 3, 4, 6, 7, 8, 9]
-var curr_index: int = 8
+var curr_index: int = 7
+
+func get_target_power() -> float:
+	return float(batting_order[curr_index]) / 10.0
+
+func current_batter() -> int:
+	return batting_order[curr_index]
 
 func send_out_next_batter() -> void:
 	var old_batter: Node3D = get_child(batting_order[curr_index] - 1)
@@ -30,6 +34,7 @@ func _ready() -> void:
 	# TODO: re-shuffle before 6th innings (after 18 outs)
 	batting_order.shuffle()
 	batting_order.insert(0, 5)
+	curr_index += 1
 	print("Batting order: ", batting_order)
 	send_out_next_batter()
 

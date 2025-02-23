@@ -28,7 +28,7 @@ func reset() -> void:
 		initial_parent.add_child.call_deferred(self)
 	position = initial_position
 
-func _on_pitcher_throw_pitch(target: Vector2, power: float, accuracy: float, new_parent: Node3D) -> void:
+func _on_pitcher_throw_pitch(target: Vector2, power: float, new_parent: Node3D) -> void:
 	is_pitched = true
 	var curr_pos = global_position
 	get_parent().remove_child(self)

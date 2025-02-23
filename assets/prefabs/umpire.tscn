@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1nqle1da70ne"]
+
+[ext_resource type="Script" path="res://umpire.gd" id="1_c6208"]
+[ext_resource type="Curve" uid="uid://cxactuhx0buua" path="res://assets/batting_odds_curve.tres" id="2_2idow"]
+
+[node name="Umpire" type="Node3D"]
+script = ExtResource("1_c6208")
+hitting_odds = ExtResource("2_2idow")

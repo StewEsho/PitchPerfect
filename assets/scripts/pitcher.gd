@@ -2,7 +2,7 @@ extends Node3D
 
 signal new_pitching_stage(stage)
 signal update_pitch_windup(value)
-signal throw_pitch(target: Vector2, power: float, accuracy: float, parent: Node3D)
+signal throw_pitch(target: Vector2, power: float, parent: Node3D)
 signal reset()
 signal request_crosshair_position()
 signal request_aim_range()
@@ -55,8 +55,7 @@ func throw_pitch_callback() -> void:
 	var rx: float = cos(r_angle) * r_radius
 	var ry: float = sin(r_angle) * r_radius
 	var actual_target_pos: Vector2 = target_pitch_pos + Vector2(rx, ry)
-	print("crosshairs: (%f, %f), actual: (%f, %f)" % [rx, ry, actual_target_pos.x, actual_target_pos.y])
-	throw_pitch.emit(actual_target_pos, power_pitch.progress, accuracy_pitch.progress, get_parent())
+	throw_pitch.emit(actual_target_pos, clamp(power_pitch.progress, 0.0, 1.0), get_parent())
 
 func update_stage(target_stage):
 	if pitch_stage == target_stage:

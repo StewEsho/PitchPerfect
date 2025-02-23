@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://crcjbowhm0vo8"]
+[gd_scene load_steps=3 format=3 uid="uid://crcjbowhm0vo8"]
 
 [ext_resource type="Script" path="res://assets/scripts/batter_manager.gd" id="1_3tfw2"]
 [ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="3_67rgf"]
 
-[sub_resource type="Curve" id="Curve_proar"]
-_data = [Vector2(0.3, 0), 0.0, 0.0, 0, 0, Vector2(0.45, 1), 0.0, 0.0, 0, 0, Vector2(0.55, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [node name="BatterLineup" type="Node3D"]
 script = ExtResource("1_3tfw2")
-hitting_odds = SubResource("Curve_proar")
 
 [node name="Batter1" parent="." instance=ExtResource("3_67rgf")]
 visible = false

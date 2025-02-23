@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=38 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
 [ext_resource type="Texture2D" uid="uid://bf8tmd7rkmu00" path="res://assets/art/ui/pitching_meter_empty.png" id="2_nedva"]
+[ext_resource type="Texture2D" uid="uid://cn2n5ostc001y" path="res://assets/art/ui/batters_box.png" id="2_nv65l"]
 [ext_resource type="Material" uid="uid://0l7ccbqfacy0" path="res://assets/prefabs/UI/power_meter_mat.tres" id="3_1ekch"]
 [ext_resource type="Texture2D" uid="uid://dwkr0oq50b24l" path="res://assets/art/ui/pitching_meter_full.png" id="4_7uqef"]
 [ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
@@ -25,11 +26,51 @@
 [ext_resource type="Script" path="res://assets/prefabs/UI/batter_ui.gd" id="18_mod16"]
 [ext_resource type="Texture2D" uid="uid://rkwvv5hwgqyo" path="res://assets/art/ui/batter/batter_bg.png" id="18_ulb4a"]
 [ext_resource type="Texture2D" uid="uid://brt5arukmcnx4" path="res://assets/art/ui/batter/batter_percentage_sign.png" id="20_ij5hl"]
+[ext_resource type="Texture2D" uid="uid://b3c603mcttlv6" path="res://assets/art/ui/batter/batter_corrupted.png" id="23_wombf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5oox"]
 shader = ExtResource("6_qlrnj")
 shader_parameter/progress = 0.0
 shader_parameter/goingLeft = true
+
+[sub_resource type="Animation" id="Animation_mj4lg"]
+resource_name = "Close"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(591, -0.25, 0, 0.133333, 78, 720, -0.8, -1, 0.25, 0),
+"times": PackedFloat32Array(0, 0.966667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(273, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"toggle_percentage_display"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_0s63i"]
 resource_name = "Open"
@@ -42,7 +83,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(720, -0.25, 0, 0, -108, 591, -0.833333, 1, 0.25, 0),
+"points": PackedFloat32Array(721, -0.25, 0, 0.133333, -85.4023, 592, -0.1, 1, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -94,45 +135,6 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_mj4lg"]
-resource_name = "Close"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(591, -0.25, 0, 0.133333, 78, 720, -0.8, -1, 0.25, 0),
-"times": PackedFloat32Array(0, 0.966667)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(273, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [false],
-"method": &"toggle_percentage_display"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_5t7hk"]
@@ -336,6 +338,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q6ndl")
 
+[node name="BattersBox" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 93.0
+offset_right = 437.0
+offset_bottom = 133.0
+texture = ExtResource("2_nv65l")
+
 [node name="PitchingMeter" type="Container" parent="." groups=["ui"]]
 layout_mode = 1
 anchors_preset = 3
@@ -454,9 +464,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 270.0
+offset_left = 268.0
 offset_top = 115.0
-offset_right = 309.0
+offset_right = 307.0
 offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -464,16 +474,17 @@ pivot_offset = Vector2(104.5, 87.5)
 theme_override_colors/default_color = Color(1, 0.933333, 0, 1)
 theme_override_fonts/normal_font = ExtResource("18_6hllk")
 theme_override_font_sizes/normal_font_size = 16
-text = "10"
+text = "99"
 scroll_active = false
+autowrap_mode = 0
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="BatterUI" type="AspectRatioContainer" parent="." node_paths=PackedStringArray("percent_text")]
 layout_mode = 0
-offset_left = 720.0
+offset_left = 591.0
 offset_top = 273.0
-offset_right = 849.0
+offset_right = 720.0
 offset_bottom = 420.0
 script = ExtResource("18_mod16")
 percent_text = NodePath("../PercentText")
@@ -487,6 +498,12 @@ texture = ExtResource("18_ulb4a")
 z_index = -1
 layout_mode = 2
 texture = ExtResource("20_ij5hl")
+
+[node name="corrupted" type="TextureRect" parent="BatterUI"]
+visible = false
+z_index = -1
+layout_mode = 2
+texture = ExtResource("23_wombf")
 
 [node name="Animator" type="AnimationPlayer" parent="BatterUI"]
 libraries = {
