@@ -71,6 +71,9 @@ func _process(delta: float) -> void:
 	if !has_pressed_pitch_yet and Input.is_action_just_pressed("pitch"):
 		has_pressed_pitch_yet = true
 		return
+	
+	if is_waiting_for_post_pitch:
+		return
 		
 	match pitch_stage:
 		PitchStage.WAIT:
@@ -94,14 +97,15 @@ func _process(delta: float) -> void:
 		PitchStage.PITCHING:
 			if not is_waiting_for_post_pitch:
 				is_waiting_for_post_pitch = true
+				target_stage = PitchStage.POST_PITCH
 				await get_tree().create_timer(1.0).timeout
 				is_waiting_for_post_pitch = false
-				target_stage = PitchStage.POST_PITCH
 		PitchStage.POST_PITCH:
 			if Input.is_action_just_pressed("pitch"):
 				_on_reset()
 		PitchStage.GAME_OVER:
 			if Input.is_action_just_pressed("pitch"):
+				print("pressed pitch: %d" % has_pressed_pitch_yet)
 				reset.emit()
 		_:
 			print("undefined behavior")

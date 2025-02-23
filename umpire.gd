@@ -102,6 +102,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_batter_lineup_baseball_hit() -> void:
+	batting_box.visible = false
 	game_over.emit(num_outs)
 
 func _input(event: InputEvent) -> void:

@@ -15,6 +15,7 @@ func _on_umpire_game_over(score: int) -> void:
 	$LoseScreen/Audio.play()
 
 func reset() -> void:
+	print("PitchingHud::reset()")
 	$AnimationPlayer.play("show_hud")
 	$BatterUI/Animator.play("Open")
 	$BattersBox.visible = true

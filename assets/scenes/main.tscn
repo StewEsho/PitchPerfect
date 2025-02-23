@@ -67,11 +67,21 @@ bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
 bones/15/scale = Vector3(1, 1, 1)
 
 [node name="BaseballAttachment" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773, 0.016516, -0.00887861, 0.0166362, 0.999822, -1.18303, -0.398432, -0.0693596)
+transform = Transform3D(-0.99987, 0.0132954, -0.00910025, -0.0134444, -0.999773, 0.0165158, -0.00887859, 0.016636, 0.999822, -1.18303, -0.398432, -0.0693598)
 
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
+[node name="PitchingMeter" parent="PitchingHud" index="1"]
+offset_left = -720.0
+offset_top = -540.0
+offset_right = -494.0
+offset_bottom = -432.0
+
 [node name="BatterUI" parent="PitchingHud" index="5" node_paths=PackedStringArray("batting_lineup")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 129.0
+offset_bottom = 147.0
 batting_lineup = NodePath("../../BatterLineup")
 
 [node name="Crosshair" parent="PitchingHud" index="7"]
