@@ -448,7 +448,7 @@ offset = Vector2(120, 51)
 [node name="Audio" type="AudioStreamPlayer2D" parent="PitchingMeter/PitchingMeterPower"]
 stream = ExtResource("7_2hvhb")
 volume_db = 1.0
-pitch_scale = 0.5
+pitch_scale = 0.75
 attenuation = 1e-05
 
 [node name="PitchingMeterTicks" type="Sprite2D" parent="PitchingMeter"]

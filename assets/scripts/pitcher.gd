@@ -38,17 +38,31 @@ var animplayer: AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	power_pitch.time_to_swing = power_duration
+	power_pitch.stage = PitchStage.WINDUP_1
 	accuracy_pitch.time_to_swing = accuracy_duration
+	accuracy_pitch.stage = PitchStage.WINDUP_2
 	accuracy_pitch.progress = 0.05  # start with a little bit in the tank
 	if $CharacterBody3D/Bobble/pitcher_model.has_node("AnimationPlayer"):
 		animplayer = $CharacterBody3D/Bobble/pitcher_model/AnimationPlayer;
 		animplayer.queue("Idle")		
 
 func windup(delta: float, data) -> bool:
-	data.progress += minf(delta / data.time_to_swing, 1.0)
-	update_pitch_windup.emit(data.progress)
-	# return true to stop progress
-	return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
+	data.progress += delta / data.time_to_swing
+	if data.stage == PitchStage.WINDUP_1:
+		# power meter goes forward then back
+		data.progress = minf(data.progress, 2.0)
+		var x = 1 - abs(data.progress - 1)
+		update_pitch_windup.emit(x)
+		if Input.is_action_just_pressed("pitch") or data.progress >= 2.0:
+			data.progress = x
+			return true 
+	elif data.stage == PitchStage.WINDUP_2:
+		# accuracy meter only goes forward
+		data.progress = minf(data.progress, 1.0)
+		update_pitch_windup.emit(data.progress)
+		# return true to stop progress
+		return (data.progress >= 1.0) or Input.is_action_just_pressed("pitch")
+	return false
 
 func throw_pitch_callback() -> void:
 	$Audio.play()
