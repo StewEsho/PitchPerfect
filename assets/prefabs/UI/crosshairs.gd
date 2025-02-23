@@ -62,9 +62,11 @@ func _on_pitcher_request_crosshair_position() -> void:
 	crosshair_position_response.emit(position)
 
 func _on_pitcher_request_aim_range() -> void:
+	$Meter.material.set_shader_parameter("progress", 0)
 	aim_range_response.emit(aim_range)
 
 func _on_pitcher_reset() -> void:
+	$Meter.material.set_shader_parameter("progress", 0)
 	set_variance(variance)  # to setup side-effects
 	set_aim_range(variance)
 	is_crosshair_shaking = true
@@ -85,7 +87,11 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, aim_range, Color(Color.AQUA, 0.25), true, -1, true)
 
 func _on_pitcher_update_pitch_windup(value: Variant) -> void:
-	if pitching_stage == 2:  # accuracy windup
+	if pitching_stage == Pitcher.PitchStage.WINDUP_1:  # power windup
+		$Meter.material.set_shader_parameter("progress", value)
+		return
+		
+	if pitching_stage == Pitcher.PitchStage.WINDUP_2:  # accuracy windup
 		# aliasing
 		var b = variance
 		var a = min_aim_range
@@ -93,3 +99,4 @@ func _on_pitcher_update_pitch_windup(value: Variant) -> void:
 		# Then, we increase back to maximum range (i.e. variance)
 		var coeff = 1 if value < SWEET_SPOT else 2
 		aim_range = ((b - a) * SWEET_SPOT_INV * coeff * abs(value - SWEET_SPOT)) + a
+		return
