@@ -108,6 +108,7 @@ batting_box = NodePath("../PitchingHud/BattersBox")
 [connection signal="game_over" from="Umpire" to="Pitcher" method="_on_umpire_game_over"]
 [connection signal="game_over" from="Umpire" to="PitchingHud" method="_on_umpire_game_over"]
 [connection signal="set_ball_num" from="Umpire" to="PitchingHud/Bug" method="set_balls"]
+[connection signal="set_outs_num" from="Umpire" to="PitchingHud" method="_on_umpire_set_outs_num"]
 [connection signal="set_outs_num" from="Umpire" to="PitchingHud/Outs" method="set_num_outs"]
 [connection signal="set_outs_num" from="Umpire" to="BatterLineup" method="_on_umpire_set_outs_num"]
 [connection signal="set_strike_num" from="Umpire" to="PitchingHud/Bug" method="set_strikes"]

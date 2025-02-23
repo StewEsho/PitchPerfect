@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=48 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bxtajkqpcj4bt" path="res://assets/art/ui/you_won.png" id="32_h8niy"]
 [ext_resource type="AudioStream" uid="uid://dx6qq6tr1hxaj" path="res://assets/audio/sfx/better_luck.wav" id="32_wlpfa"]
 [ext_resource type="AudioStream" uid="uid://cc0e24mds3o6" path="res://assets/audio/sfx/thanks_for_playing.wav" id="33_vby75"]
+[ext_resource type="AudioStream" uid="uid://dcygg6wlr0164" path="res://assets/audio/music/pitch_perfect_drums.ogg" id="35_8sqs3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5oox"]
 shader = ExtResource("6_qlrnj")
@@ -603,7 +604,8 @@ script = ExtResource("16_yydo5")
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="Crosshair"]
 stream = ExtResource("17_rpurk")
-volume_db = 1.0
+volume_db = 0.8
+pitch_scale = 1.2
 max_distance = 1e+07
 panning_strength = 0.0
 playback_type = 1
@@ -688,3 +690,6 @@ script = ExtResource("31_l2mam")
 [node name="Audio" type="AudioStreamPlayer2D" parent="WinScreen"]
 stream = ExtResource("33_vby75")
 volume_db = 1.0
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("35_8sqs3")

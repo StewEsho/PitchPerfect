@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 	var pitch_weight = (target_pos - position).length() / (variance * 2)
 	position = (position + target_pos) * .5
 	var volume_weight = (position-get_viewport().get_mouse_position()).length() / variance
-	astream.volume_db = lerp(5.0, -5.0, volume_weight - (0.5 * pitch_weight)) -1
+	astream.volume_db = lerp(5.0, -5.0, volume_weight - (0.5 * pitch_weight)) - 5
 	astream.pitch_scale = lerp(1.0, 1.2, pitch_weight - volume_weight)
 
 func _on_pitcher_request_crosshair_position() -> void:

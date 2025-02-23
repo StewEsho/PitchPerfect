@@ -25,6 +25,7 @@ func _on_umpire_game_over(score: int) -> void:
 	if score < 9:
 		screen = $LoseScreen
 		ScoreRects[score].visible = true
+		$BackgroundMusic.stop()
 	else:
 		screen = $WinScreen
 
@@ -41,9 +42,15 @@ func reset() -> void:
 	$BattersBox.visible = true
 	$LoseScreen.visible = false
 	$WinScreen.visible = false
+	$BackgroundMusic.stop()
 	for i in range(9):
 		ScoreRects[i].visible = false
 
 func _on_umpire_you_win() -> void:
 	$AnimationPlayer.play("hide_hud")
 	$BatterUI/Animator.play("Close")
+
+
+func _on_umpire_set_outs_num(num: int) -> void:
+	if not $BackgroundMusic.playing and num >= 1:
+		$BackgroundMusic.play()

@@ -27,6 +27,5 @@ func hit_ball() -> void:
 	$bat_hit_sfx.play()
 	batter_hits_ball.emit()
 
-
 func _on_batter_lineup_parent_ready() -> void:
 	batter_hits_ball.connect(get_parent_node_3d()._on_batter_hits_ball)
