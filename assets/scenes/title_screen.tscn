@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://biejgv3b13bod"]
+[gd_scene load_steps=8 format=3 uid="uid://biejgv3b13bod"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/title_screen.gd" id="1_cifwc"]
 [ext_resource type="Texture2D" uid="uid://ce0vp1nhd3k63" path="res://assets/art/ui/title_screen/title_screen_bg.png" id="1_plxv3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://assets/scenes/title_screen_render.gd" id="3_yikcu"]
 [ext_resource type="Texture2D" uid="uid://6k3lrwynomrk" path="res://assets/art/ui/title_screen/title_screen_continue.png" id="4_r8qkh"]
 [ext_resource type="Script" path="res://assets/scenes/ui_blink.gd" id="5_rkwvt"]
+[ext_resource type="AudioStream" uid="uid://qaf1pwf03uc" path="res://assets/audio/music/pitch_perfect_title-001.ogg" id="7_iry78"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -32,3 +33,7 @@ offset_bottom = 540.0
 texture = ExtResource("4_r8qkh")
 script = ExtResource("5_rkwvt")
 blink_duration = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_iry78")
+autoplay = true
