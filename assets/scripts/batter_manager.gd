@@ -65,15 +65,16 @@ func _process(delta: float) -> void:
 	position.y += (target_y_pos - position.y) * 0.4
 
 func _input(event: InputEvent) -> void:
-	if OS.is_debug_build() and not event.is_echo():
-		if Input.is_key_pressed(KEY_G):
-			send_out_next_batter()
-		if Input.is_key_pressed(KEY_U):
-			_on_umpire_batter_hit(-1)
-		if Input.is_key_pressed(KEY_I):
-			_on_umpire_batter_hit(0)
-		if Input.is_key_pressed(KEY_O):
-			_on_umpire_batter_hit(1)
+	pass
+	#if OS.is_debug_build() and not event.is_echo():
+		#if Input.is_key_pressed(KEY_G):
+			#send_out_next_batter()
+		#if Input.is_key_pressed(KEY_U):
+			#_on_umpire_batter_hit(-1)
+		#if Input.is_key_pressed(KEY_I):
+			#_on_umpire_batter_hit(0)
+		#if Input.is_key_pressed(KEY_O):
+			#_on_umpire_batter_hit(1)
 
 func _on_umpire_batter_hit(y_relative: float) -> void:
 	target_y_pos = default_y_pos + (y_relative * y_pos_range)

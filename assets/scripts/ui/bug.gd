@@ -60,13 +60,14 @@ func _ready() -> void:
 		load_rect("res://assets/art/ui/bug/bug_b%d.png" % (i + 1), BallRects)
 
 func _input(event: InputEvent) -> void:
-	var just_pressed = event.is_pressed() and not event.is_echo()
-	if Input.is_key_pressed(KEY_Q) and just_pressed:
-		add_strike()
-	if Input.is_key_pressed(KEY_E) and just_pressed:
-		add_ball()
-	if Input.is_key_pressed(KEY_R) and just_pressed:
-		set_bug(0, 0)
+	pass
+	#var just_pressed = event.is_pressed() and not event.is_echo()
+	#if Input.is_key_pressed(KEY_Q) and just_pressed:
+		#add_strike()
+	#if Input.is_key_pressed(KEY_E) and just_pressed:
+		#add_ball()
+	#if Input.is_key_pressed(KEY_R) and just_pressed:
+		#set_bug(0, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

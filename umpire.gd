@@ -105,6 +105,7 @@ func _on_batter_lineup_baseball_hit() -> void:
 	game_over.emit(num_outs)
 
 func _input(event: InputEvent) -> void:
-	if OS.is_debug_build() and not event.is_echo():
-		if Input.is_key_pressed(KEY_L):
-			process_strike(false)
+	pass
+	#if OS.is_debug_build() and not event.is_echo():
+		#if Input.is_key_pressed(KEY_L):
+			#process_strike(false)
