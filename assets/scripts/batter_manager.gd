@@ -23,34 +23,46 @@ func current_batter() -> int:
 func current_batter_node() -> Node3D:
 	return get_child(batting_order[curr_index] - 1)
 
-func send_out_next_batter() -> void:
-	var old_batter: Node3D = get_child(batting_order[curr_index] - 1)
-	if !old_batter.is_ready:
-		print("batter %d isn't ready to exit yet!" % batting_order[curr_index])
-		return
-		
-	if old_batter.visible:
-		old_batter.get_node("Animator").play("exit")
+func send_out_next_batter(index: int = -1) -> void:
+	if index >= 0:
+		var old_batter: Node3D = get_child(batting_order[curr_index] - 1)
+		if !old_batter.is_ready:
+			print("batter %d isn't ready to exit yet!" % batting_order[curr_index])
+			return
+			
+		if old_batter.visible:
+			old_batter.get_node("Animator").play("exit")
 	
+	print("BatterManager: send_out_next_batter")
 	target_y_pos = default_y_pos
-	curr_index = (curr_index + 1) % 9
+	curr_index = index if index >= 0 else (curr_index + 1) % 9
+	print(curr_index)
 	var batter :Node3D = current_batter_node()
 	batter.get_node("Animator").play("enter")
 	batter.update_jersey_tex()
 	batter_update.emit(current_batter())
+
+func reset() -> void:
+	print("BatterManager: reset()")
+	for i in range(9):
+		get_child(i).get_node("Animator").play("exit")
+	batting_order.shuffle() # we don't care about 5 being first after a reset
+	print(batting_order)
+	curr_index = -1
+	default_y_pos = position.y
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# TODO: re-shuffle before 6th innings (after 18 outs)
 	batting_order.shuffle()
 	batting_order.insert(0, 5)
-	curr_index += 1
-	send_out_next_batter()
+	print(batting_order)
+	send_out_next_batter(0)
 	default_y_pos = position.y
 	parent_ready.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:\
+func _process(delta: float) -> void:
 	position.y += (target_y_pos - position.y) * 0.4
 
 func _input(event: InputEvent) -> void:

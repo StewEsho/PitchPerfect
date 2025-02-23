@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 func swing() -> void:
 	$model/AnimationPlayer.stop()
 	$model/AnimationPlayer.play("Swing")
+	$model/AnimationPlayer.queue("Idle")
 
 func hit_ball() -> void:
 	$bat_hit_sfx.play()

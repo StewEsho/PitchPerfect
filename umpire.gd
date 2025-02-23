@@ -31,6 +31,7 @@ func reset() -> void:
 	set_strike_num.emit(num_strikes)
 	set_ball_num.emit(num_balls)
 	set_outs_num.emit(num_outs)
+	batting_box.visible = true
 
 func print_stats() -> void:
 	print("Batter #%d -- S=%d B=%d" % [num_outs + 1, num_strikes, num_balls])
@@ -53,7 +54,7 @@ func process_strike(is_perfect: bool) -> void:
 		print("Umpire: batter %d is out!" % batter_lineup.current_batter())
 		num_outs += 1
 		
-func process_ball_hit(pos: Vector2) -> void:
+func process_hit(pos: Vector2) -> void:
 	print("Umpire: The batter hits!")
 	# we send a relative value of the bounding box,
 	# 1 if its at the top, -1 if its at the bottom
@@ -63,10 +64,12 @@ func process_ball_hit(pos: Vector2) -> void:
 	y_relative -= 0.5
 	y_relative *= -2
 	print(y_relative)
-	batter_hit.emit(y_relative) 
+	batter_hit.emit(y_relative)
+	game_over.emit(num_outs)
 
 func process_pitch(pos: Vector2, power: float, _null) -> void:
 	print("Umpire: processing pitch with power %f at position (%f, %f)" % [power, pos.x, pos.y])
+	batting_box.visible = false
 	var target_power = batter_lineup.get_target_power()
 	var is_in_bounds: bool = batting_box_bounds.has_point(pos)
 	if not is_in_bounds:
@@ -81,7 +84,7 @@ func process_pitch(pos: Vector2, power: float, _null) -> void:
 	elif randf() <= power_odds:
 		process_strike(false)
 	else:
-		process_ball_hit(pos)
+		process_hit(pos)
 	print_stats()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
