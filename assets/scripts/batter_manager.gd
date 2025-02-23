@@ -45,3 +45,6 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if not event.is_echo() and Input.is_key_pressed(KEY_G):
 		send_out_next_batter()
+
+func _on_umpire_batter_hit(pos: Vector2) -> void:
+	print("TODO: batter_manager._on_umpire_batter_hit")

@@ -4,7 +4,7 @@ signal game_over(score: int)
 signal set_ball_num(num: int)
 signal set_strike_num(num: int)
 signal set_outs_num(num: int)
-signal batter_hit()
+signal batter_hit(pos: Vector2)
 
 @export var pitcher: Node3D
 @export var batter_lineup: Node3D

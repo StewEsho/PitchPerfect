@@ -8,3 +8,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 		
+
+
+func _on_umpire_game_over(score: int) -> void:
+	print("TODO: ui_manager._on_umpire_game_over()")

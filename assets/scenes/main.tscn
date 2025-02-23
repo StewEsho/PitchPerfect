@@ -73,6 +73,10 @@ transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773,
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
 [node name="BatterUI" parent="PitchingHud" index="5" node_paths=PackedStringArray("batting_lineup")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 129.0
+offset_bottom = 147.0
 batting_lineup = NodePath("../../BatterLineup")
 
 [node name="Crosshair" parent="PitchingHud" index="7"]
@@ -107,6 +111,12 @@ batting_box = NodePath("../PitchingHud/BattersBox")
 [connection signal="aim_range_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_aim_range_response"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
 [connection signal="batter_update" from="BatterLineup" to="PitchingHud/BatterUI" method="_on_batter_lineup_batter_update"]
+[connection signal="batter_hit" from="Umpire" to="BatterLineup" method="_on_umpire_batter_hit"]
+[connection signal="game_over" from="Umpire" to="Pitcher" method="_on_umpire_game_over"]
+[connection signal="game_over" from="Umpire" to="PitchingHud" method="_on_umpire_game_over"]
+[connection signal="set_ball_num" from="Umpire" to="PitchingHud/Bug" method="set_balls"]
+[connection signal="set_outs_num" from="Umpire" to="PitchingHud/Outs" method="set_num_outs"]
+[connection signal="set_strike_num" from="Umpire" to="PitchingHud/Bug" method="set_strikes"]
 
 [editable path="Pitcher"]
 [editable path="Pitcher/CharacterBody3D/Bobble/pitcher_model"]

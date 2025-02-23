@@ -30,7 +30,7 @@ func set_bug(strikes: int, balls: int) -> void:
 	set_balls(balls)
 
 func set_strikes(strikes: int) -> void:
-	num_strikes = strikes
+	num_strikes = min(strikes, MAX_STRIKES)
 	for i in range(MAX_STRIKES):
 		StrikeRects[i].visible = i + 1 <= num_strikes
 	
@@ -38,7 +38,7 @@ func set_strikes(strikes: int) -> void:
 		s_three_strikes.emit()
 
 func set_balls(balls: int) -> void:
-	num_balls = balls
+	num_balls = min(balls, MAX_BALLS)
 	for i in range(MAX_BALLS):
 		BallRects[i].visible = i + 1 <= num_balls
 	

@@ -7,7 +7,7 @@ var rects: Array[TextureRect] = []
 var num_outs: int = 0
 
 func set_num_outs(num: int) -> void:
-	num_outs = num
+	num_outs = min(num, MAX_OUTS)
 	for i in range(MAX_OUTS):
 		rects[i].visible = (i + 1) <= num
 		
