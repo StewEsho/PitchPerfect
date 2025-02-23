@@ -615,7 +615,7 @@ texture = ExtResource("28_12wcs")
 
 [node name="LoseScreen" type="ColorRect" parent="."]
 visible = false
-z_index = 10
+z_index = 5
 material = SubResource("CanvasItemMaterial_d5arf")
 layout_mode = 1
 anchors_preset = 15
@@ -626,6 +626,7 @@ grow_vertical = 2
 color = Color(0.356863, 0.623529, 0.94902, 1)
 
 [node name="you_lost_text" type="TextureRect" parent="LoseScreen"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -635,6 +636,7 @@ grow_vertical = 2
 texture = ExtResource("29_j2bwc")
 
 [node name="continue" type="TextureRect" parent="LoseScreen"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -650,7 +652,7 @@ volume_db = 1.0
 
 [node name="WinScreen" type="ColorRect" parent="."]
 visible = false
-z_index = 10
+z_index = 5
 material = SubResource("CanvasItemMaterial_d5arf")
 layout_mode = 1
 anchors_preset = 15
@@ -661,6 +663,7 @@ grow_vertical = 2
 color = Color(0.886275, 0.196078, 0.133333, 1)
 
 [node name="you_win_text" type="TextureRect" parent="WinScreen"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -670,6 +673,7 @@ grow_vertical = 2
 texture = ExtResource("32_h8niy")
 
 [node name="continue" type="TextureRect" parent="WinScreen"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
