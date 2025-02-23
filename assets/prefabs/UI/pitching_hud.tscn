@@ -652,7 +652,7 @@ volume_db = 1.0
 
 [node name="WinScreen" type="ColorRect" parent="."]
 visible = false
-z_index = 5
+z_index = 540
 material = SubResource("CanvasItemMaterial_d5arf")
 layout_mode = 1
 anchors_preset = 15

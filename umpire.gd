@@ -1,7 +1,6 @@
 extends Node3D
 
 signal game_over(score: int)
-signal you_win()
 signal set_ball_num(num: int)
 signal set_strike_num(num: int)
 signal set_outs_num(num: int)
@@ -65,7 +64,7 @@ func process_strike(is_perfect: bool) -> void:
 		$Sounds/Out.play()
 		set_outs_num.emit(num_outs)
 		if num_outs == max_outs:
-			you_win.emit()
+			game_over.emit(num_outs)
 		
 func process_hit(pos: Vector2) -> void:
 	print("Umpire: The batter hits!")

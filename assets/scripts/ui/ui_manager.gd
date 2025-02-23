@@ -21,11 +21,18 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_umpire_game_over(score: int) -> void:
+	var screen: ColorRect
+	if score < 9:
+		screen = $LoseScreen
+		ScoreRects[score].visible = true
+	else:
+		screen = $WinScreen
+
 	$AnimationPlayer.play("hide_hud")
 	$BatterUI/Animator.play("Close")
-	$LoseScreen.visible = true
-	$LoseScreen/Audio.play()
-	ScoreRects[score].visible = true
+	screen.visible = true
+	await get_tree().create_timer(0.75).timeout
+	screen.get_node("Audio").play()
 
 func reset() -> void:
 	print("PitchingHud::reset()")
@@ -40,5 +47,3 @@ func reset() -> void:
 func _on_umpire_you_win() -> void:
 	$AnimationPlayer.play("hide_hud")
 	$BatterUI/Animator.play("Close")
-	$WinScreen.visible = true
-	$WinScreen/Audio.play()

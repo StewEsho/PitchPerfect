@@ -82,6 +82,7 @@ func update_stage(target_stage):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print("STAGE: %d" % pitch_stage)
 	if !has_pressed_pitch_yet and Input.is_action_just_pressed("pitch"):
 		has_pressed_pitch_yet = true
 		return
@@ -138,4 +139,5 @@ func _on_crosshair_aim_range_response(range: float) -> void:
 
 func _on_umpire_game_over(score: int) -> void:
 	target_stage = PitchStage.GAME_OVER
+	update_stage(target_stage)
 	has_pressed_pitch_yet = false
