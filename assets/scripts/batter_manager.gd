@@ -24,14 +24,13 @@ func current_batter_node() -> Node3D:
 	return get_child(batting_order[curr_index] - 1)
 
 func send_out_next_batter(index: int = -1) -> void:
-	if index >= 0:
-		var old_batter: Node3D = get_child(batting_order[curr_index] - 1)
-		if !old_batter.is_ready:
-			print("batter %d isn't ready to exit yet!" % batting_order[curr_index])
-			return
-			
-		if old_batter.visible:
-			old_batter.get_node("Animator").play("exit")
+	var old_batter: Node3D = get_child(batting_order[curr_index] - 1)
+	if !old_batter.is_ready:
+		print("batter %d isn't ready to exit yet!" % batting_order[curr_index])
+		return
+		
+	if old_batter.visible:
+		old_batter.get_node("Animator").play("exit")
 	
 	print("BatterManager: send_out_next_batter")
 	target_y_pos = default_y_pos
@@ -49,7 +48,7 @@ func reset() -> void:
 	batting_order.shuffle() # we don't care about 5 being first after a reset
 	print(batting_order)
 	curr_index = -1
-	default_y_pos = position.y
+	target_y_pos = default_y_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,8 +77,11 @@ func _input(event: InputEvent) -> void:
 
 func _on_umpire_batter_hit(y_relative: float) -> void:
 	target_y_pos = default_y_pos + (y_relative * y_pos_range)
-	print("new_target_y_pos: %f" % target_y_pos)
 	current_batter_node().swing()
 
 func _on_batter_hits_ball() -> void:
 	baseball_node.hit()
+	baseball_hit.emit()
+
+func _on_umpire_set_outs_num(num: int) -> void:
+	send_out_next_batter()

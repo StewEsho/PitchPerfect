@@ -1,8 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1nqle1da70ne"]
+[gd_scene load_steps=7 format=3 uid="uid://d1nqle1da70ne"]
 
 [ext_resource type="Script" path="res://umpire.gd" id="1_c6208"]
 [ext_resource type="Curve" uid="uid://cxactuhx0buua" path="res://assets/batting_odds_curve.tres" id="2_2idow"]
+[ext_resource type="AudioStream" uid="uid://dncgap0dmf5ca" path="res://assets/audio/sfx/alright.wav" id="3_tp62g"]
+[ext_resource type="AudioStream" uid="uid://3ap2tit6ulpc" path="res://assets/audio/sfx/good_range.wav" id="4_i7ft4"]
+[ext_resource type="AudioStream" uid="uid://dgvcks7ro4ucj" path="res://assets/audio/sfx/aw_dang_it.wav" id="4_up3pe"]
+[ext_resource type="AudioStream" uid="uid://bnsy2lo1778lk" path="res://assets/audio/sfx/success.wav" id="5_vi7t0"]
 
 [node name="Umpire" type="Node3D"]
 script = ExtResource("1_c6208")
 hitting_odds = ExtResource("2_2idow")
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Alright" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("3_tp62g")
+attenuation_model = 3
+
+[node name="Perfect" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("4_i7ft4")
+attenuation_model = 3
+
+[node name="Out" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("5_vi7t0")
+attenuation_model = 3
+
+[node name="DangIt" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("4_up3pe")
+attenuation_model = 3

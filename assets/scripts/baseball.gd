@@ -56,3 +56,7 @@ func hit() -> void:
 	global_position = Vector3(0, 0, -5)  # CENTER IN FRONT OF CAM 
 	linear_velocity = Vector3.ZERO
 	is_hit = true
+
+func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
+	if stage == Pitcher.PitchStage.WAIT:
+		reset()

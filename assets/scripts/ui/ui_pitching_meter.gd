@@ -10,6 +10,7 @@ const ACC_WINDUP_STAGE = 2
 func _ready() -> void:
 	$PitchingMeterPower.material.set_shader_parameter("goingLeft", false)
 	$PitchingMeterAccuracy.material.set_shader_parameter("goingLeft", true)
+	meter = $PitchingMeterPower
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -22,26 +23,27 @@ func update_progress(amount: float) -> void:
 	meter.material.set_shader_parameter("progress", amount)	
 
 func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
-	if meter:
-		if meter.has_node("Audio"):
-			meter.get_node("Audio").stop()
-		$ConfirmAudio.play()
-		if randf() < 0.5:
-			$AudioPerfect.play() # TODO: only if we hit Sweetspot (within 0.05)
-	
 	self.stage = stage
-	if stage == POWER_WINDUP_STAGE:
+	if stage == Pitcher.PitchStage.WAIT:
+		_on_pitcher_reset()
+		return
+	
+	if meter and meter.has_node("Audio"):
+		meter.get_node("Audio").stop()
+	
+	if stage == Pitcher.PitchStage.WINDUP_1:
 		meter = $PitchingMeterPower
-	elif stage == ACC_WINDUP_STAGE:
+		meter.get_node("Audio").play()
+	elif stage == Pitcher.PitchStage.WINDUP_2:
 		meter = $PitchingMeterAccuracy
+		meter.get_node("Audio").play()
+		$ConfirmAudio.play()
+	elif stage == Pitcher.PitchStage.PITCHING:
+		$ConfirmAudio.play()
 	else:	
 		meter = null
-	
-	if meter:
-		if meter.has_node("Audio"):
-			meter.get_node("Audio").play()
-
 
 func _on_pitcher_reset() -> void:
 	$PitchingMeterPower.material.set_shader_parameter("progress", 0)
 	$PitchingMeterAccuracy.material.set_shader_parameter("progress", 0)
+	meter = $PitchingMeterPower

@@ -60,7 +60,6 @@ func _process(delta: float) -> void:
 func _on_pitcher_request_crosshair_position() -> void:
 	is_crosshair_shaking = false
 	crosshair_position_response.emit(position)
-	Input.set_custom_mouse_cursor(mouse_cursor_dot)
 
 func _on_pitcher_request_aim_range() -> void:
 	aim_range_response.emit(aim_range)
@@ -76,6 +75,10 @@ func _on_pitcher_reset() -> void:
 
 func _on_pitcher_new_pitching_stage(stage: Variant) -> void:
 	pitching_stage = stage
+	if stage == Pitcher.PitchStage.WAIT: # WAIT
+		_on_pitcher_reset()
+	if stage == Pitcher.PitchStage.POST_PITCH:
+		Input.set_custom_mouse_cursor(mouse_cursor_dot)
 	
 func _draw() -> void:
 	if pitching_stage <= 3: # Pitching; stop showing post-

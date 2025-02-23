@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8w6yc4jlcj3v"]
+[gd_scene load_steps=8 format=3 uid="uid://b8w6yc4jlcj3v"]
 
 [ext_resource type="PackedScene" uid="uid://bsr3rm3jjqmrk" path="res://assets/prefabs/pitcher.tscn" id="1_mlujd"]
 [ext_resource type="PackedScene" uid="uid://cjfgt24yonh2i" path="res://assets/prefabs/UI/pitching_hud.tscn" id="2_024tn"]
 [ext_resource type="Texture2D" uid="uid://dd4u0jf08oq0j" path="res://assets/art/background_1.png" id="4_00f4o"]
+[ext_resource type="PackedScene" uid="uid://p3dhoxkui2wu" path="res://assets/prefabs/batter.tscn" id="4_l5hpg"]
 [ext_resource type="PackedScene" uid="uid://crcjbowhm0vo8" path="res://assets/prefabs/batter_lineup.tscn" id="6_bf2r0"]
 [ext_resource type="PackedScene" uid="uid://d1nqle1da70ne" path="res://assets/prefabs/umpire.tscn" id="7_klnnu"]
 
@@ -52,6 +53,8 @@ fov = 60.0
 
 [node name="Pitcher" parent="." instance=ExtResource("1_mlujd")]
 transform = Transform3D(-0.801974, 0, 0.597359, 0, 1, 0, -0.597359, 0, -0.801974, -0.593952, -0.603749, 0.730923)
+power_duration = null
+accuracy_duration = null
 
 [node name="Skeleton3D" parent="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
@@ -82,12 +85,19 @@ cursor_speed = 1.75
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.296, -3.534)
 baseball_node = NodePath("../Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D/BaseballAttachment/Baseball")
 
+[node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
+visible = false
+
+[node name="Pitcher2" parent="." instance=ExtResource("1_mlujd")]
+transform = Transform3D(0.85118, -0.071285, -0.520011, 0.0488949, 0.997195, -0.0566659, 0.522592, 0.022807, 0.852278, 0.609121, -0.515375, 0.3633)
+visible = false
+script = null
+
 [node name="Umpire" parent="." node_paths=PackedStringArray("pitcher", "batter_lineup", "batting_box") instance=ExtResource("7_klnnu")]
 pitcher = NodePath("../Pitcher")
 batter_lineup = NodePath("../BatterLineup")
 batting_box = NodePath("../PitchingHud/BattersBox")
 
-[connection signal="new_pitching_stage" from="Pitcher" to="Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D/BaseballAttachment/Baseball" method="_on_pitcher_new_pitching_stage"]
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/PitchingMeter" method="_on_pitcher_new_pitching_stage"]
 [connection signal="new_pitching_stage" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_new_pitching_stage"]
 [connection signal="request_aim_range" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_request_aim_range"]
@@ -102,14 +112,13 @@ batting_box = NodePath("../PitchingHud/BattersBox")
 [connection signal="update_pitch_windup" from="Pitcher" to="PitchingHud/Crosshair" method="_on_pitcher_update_pitch_windup"]
 [connection signal="aim_range_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_aim_range_response"]
 [connection signal="crosshair_position_response" from="PitchingHud/Crosshair" to="Pitcher" method="_on_crosshair_crosshair_position_response"]
-[connection signal="baseball_hit" from="BatterLineup" to="Umpire" method="_on_batter_lineup_baseball_hit"]
 [connection signal="batter_update" from="BatterLineup" to="PitchingHud/BatterUI" method="_on_batter_lineup_batter_update"]
 [connection signal="batter_hit" from="Umpire" to="BatterLineup" method="_on_umpire_batter_hit"]
 [connection signal="game_over" from="Umpire" to="Pitcher" method="_on_umpire_game_over"]
 [connection signal="game_over" from="Umpire" to="PitchingHud" method="_on_umpire_game_over"]
 [connection signal="set_ball_num" from="Umpire" to="PitchingHud/Bug" method="set_balls"]
 [connection signal="set_outs_num" from="Umpire" to="PitchingHud/Outs" method="set_num_outs"]
-[connection signal="set_outs_num" from="Umpire" to="BatterLineup" method="_on_umpire_set_outs_num"]
+[connection signal="set_outs_num" from="Umpire" to="BatterLineup" method="send_out_next_batter" unbinds=1]
 [connection signal="set_strike_num" from="Umpire" to="PitchingHud/Bug" method="set_strikes"]
 [connection signal="you_win" from="Umpire" to="PitchingHud" method="_on_umpire_you_win"]
 

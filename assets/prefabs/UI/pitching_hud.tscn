@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cjfgt24yonh2i"]
+[gd_scene load_steps=45 format=3 uid="uid://cjfgt24yonh2i"]
 
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_pitching_meter.gd" id="1_d6u8m"]
 [ext_resource type="Script" path="res://assets/scripts/ui/ui_manager.gd" id="1_q6ndl"]
@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cfn6tcakpbq08" path="res://assets/art/ui/pitching_meter_frame.png" id="5_kv8by"]
 [ext_resource type="Shader" path="res://assets/shaders/pitching_hud.gdshader" id="6_qlrnj"]
 [ext_resource type="Texture2D" uid="uid://kx4x8rslkpep" path="res://assets/art/ui/pitching_meter_accuracy.png" id="7_1uj1h"]
+[ext_resource type="AudioStream" uid="uid://xk62kcog1643" path="res://assets/audio/sfx/power_meter.wav" id="7_2hvhb"]
 [ext_resource type="Texture2D" uid="uid://c5j307ld0rcmo" path="res://assets/art/ui/meter_ticks.png" id="7_e7cc7"]
-[ext_resource type="AudioStream" uid="uid://3ap2tit6ulpc" path="res://assets/audio/sfx/good_range.wav" id="7_wppqt"]
 [ext_resource type="AudioStream" uid="uid://x0lx1yncd7m" path="res://assets/audio/sfx/accuracy_meter.wav" id="8_n3n4p"]
 [ext_resource type="Texture2D" uid="uid://cy6g25qkplk1r" path="res://assets/art/ui/outs/outs_bg.png" id="9_fy0nm"]
 [ext_resource type="Script" path="res://assets/scripts/ui/outs.gd" id="9_qcdqw"]
@@ -27,6 +27,12 @@
 [ext_resource type="Texture2D" uid="uid://rkwvv5hwgqyo" path="res://assets/art/ui/batter/batter_bg.png" id="18_ulb4a"]
 [ext_resource type="Texture2D" uid="uid://brt5arukmcnx4" path="res://assets/art/ui/batter/batter_percentage_sign.png" id="20_ij5hl"]
 [ext_resource type="Texture2D" uid="uid://b3c603mcttlv6" path="res://assets/art/ui/batter/batter_corrupted.png" id="23_wombf"]
+[ext_resource type="Texture2D" uid="uid://c3u3f720x6gnr" path="res://assets/art/ui/you_lost.png" id="29_j2bwc"]
+[ext_resource type="Texture2D" uid="uid://dw48ar274j8wc" path="res://assets/art/ui/continue.png" id="30_hs7t7"]
+[ext_resource type="Script" path="res://assets/scenes/ui_blink.gd" id="31_l2mam"]
+[ext_resource type="Texture2D" uid="uid://bxtajkqpcj4bt" path="res://assets/art/ui/you_won.png" id="32_h8niy"]
+[ext_resource type="AudioStream" uid="uid://dx6qq6tr1hxaj" path="res://assets/audio/sfx/better_luck.wav" id="32_wlpfa"]
+[ext_resource type="AudioStream" uid="uid://cc0e24mds3o6" path="res://assets/audio/sfx/thanks_for_playing.wav" id="33_vby75"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u5oox"]
 shader = ExtResource("6_qlrnj")
@@ -395,6 +401,9 @@ _data = {
 "show_hud": SubResource("Animation_uq310")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_d5arf"]
+blend_mode = 3
+
 [node name="PitchingHud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -437,9 +446,10 @@ texture = ExtResource("4_7uqef")
 offset = Vector2(120, 51)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="PitchingMeter/PitchingMeterPower"]
-stream = ExtResource("8_n3n4p")
-volume_db = 0.8
+stream = ExtResource("7_2hvhb")
+volume_db = 1.0
 pitch_scale = 0.5
+attenuation = 1e-05
 
 [node name="PitchingMeterTicks" type="Sprite2D" parent="PitchingMeter"]
 texture = ExtResource("7_e7cc7")
@@ -463,10 +473,6 @@ stream = ExtResource("10_mynlp")
 volume_db = -2.0
 pitch_scale = 0.8
 attenuation = 0.258816
-
-[node name="AudioPerfect" type="AudioStreamPlayer2D" parent="PitchingMeter"]
-stream = ExtResource("7_wppqt")
-volume_db = 0.8
 
 [node name="Outs" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -594,3 +600,73 @@ volume_db = 1.0
 max_distance = 1e+07
 panning_strength = 0.0
 playback_type = 1
+
+[node name="LoseScreen" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+material = SubResource("CanvasItemMaterial_d5arf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.356863, 0.623529, 0.94902, 1)
+
+[node name="you_lost_text" type="TextureRect" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_j2bwc")
+
+[node name="continue" type="TextureRect" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_hs7t7")
+script = ExtResource("31_l2mam")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="LoseScreen"]
+stream = ExtResource("32_wlpfa")
+volume_db = 1.0
+
+[node name="WinScreen" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+material = SubResource("CanvasItemMaterial_d5arf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.886275, 0.196078, 0.133333, 1)
+
+[node name="you_win_text" type="TextureRect" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_h8niy")
+
+[node name="continue" type="TextureRect" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("30_hs7t7")
+script = ExtResource("31_l2mam")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="WinScreen"]
+stream = ExtResource("33_vby75")
+volume_db = 1.0

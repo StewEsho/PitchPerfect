@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Pitcher
+
 signal new_pitching_stage(stage)
 signal update_pitch_windup(value)
 signal throw_pitch(target: Vector2, power: float, parent: Node3D)
@@ -11,7 +13,7 @@ signal request_aim_range()
 @export var accuracy_duration: float = 1.0
 @export var baseball_asset: PackedScene
 
-enum PitchStage {WAIT, WINDUP_1, WINDUP_2, PITCHING, POST_PITCH}
+enum PitchStage {WAIT, WINDUP_1, WINDUP_2, PITCHING, POST_PITCH, GAME_OVER}
 var pitch_stage: PitchStage = PitchStage.WAIT
 var target_stage = pitch_stage
 
@@ -19,6 +21,7 @@ var target_pitch_pos: Vector2 = Vector2.ZERO
 var target_aim_range: float = 0
 
 var has_pressed_pitch_yet: bool = false # to "eat" the input from the title screen
+var is_waiting_for_post_pitch: bool = false  # to set timer to wait before continue
 
 class PitchData:
 	var stage: PitchStage
@@ -89,9 +92,15 @@ func _process(delta: float) -> void:
 					animplayer.stop()
 					animplayer.play("Underhand" if power_pitch.progress < 0.5 else "Pitch");
 		PitchStage.PITCHING:
-			if Input.is_action_just_pressed("pitch"):
+			if not is_waiting_for_post_pitch:
+				is_waiting_for_post_pitch = true
+				await get_tree().create_timer(1.0).timeout
+				is_waiting_for_post_pitch = false
 				target_stage = PitchStage.POST_PITCH
 		PitchStage.POST_PITCH:
+			if Input.is_action_just_pressed("pitch"):
+				_on_reset()
+		PitchStage.GAME_OVER:
 			if Input.is_action_just_pressed("pitch"):
 				reset.emit()
 		_:
@@ -111,4 +120,5 @@ func _on_crosshair_aim_range_response(range: float) -> void:
 	target_aim_range = range
 
 func _on_umpire_game_over(score: int) -> void:
-	print("TODO: pitcher._on_umpire_game_over")
+	target_stage = PitchStage.GAME_OVER
+	has_pressed_pitch_yet = false
