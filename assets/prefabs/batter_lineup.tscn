@@ -40,3 +40,13 @@ jersey_num = 8
 [node name="Batter9" parent="." instance=ExtResource("3_67rgf")]
 visible = false
 jersey_num = 9
+
+[connection signal="parent_ready" from="." to="Batter1" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter2" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter3" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter4" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter5" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter6" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter7" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter8" method="_on_batter_lineup_parent_ready"]
+[connection signal="parent_ready" from="." to="Batter9" method="_on_batter_lineup_parent_ready"]

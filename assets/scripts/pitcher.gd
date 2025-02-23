@@ -110,6 +110,5 @@ func _on_crosshair_crosshair_position_response(pos: Vector2) -> void:
 func _on_crosshair_aim_range_response(range: float) -> void:
 	target_aim_range = range
 
-
 func _on_umpire_game_over(score: int) -> void:
 	print("TODO: pitcher._on_umpire_game_over")

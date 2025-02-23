@@ -342,8 +342,8 @@ script = ExtResource("1_q6ndl")
 layout_mode = 0
 offset_left = 397.0
 offset_top = 93.0
-offset_right = 437.0
-offset_bottom = 133.0
+offset_right = 518.0
+offset_bottom = 267.0
 texture = ExtResource("2_nv65l")
 
 [node name="PitchingMeter" type="Container" parent="." groups=["ui"]]

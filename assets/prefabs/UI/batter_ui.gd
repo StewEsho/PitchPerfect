@@ -43,4 +43,4 @@ func _on_batter_lineup_batter_update(num: int) -> void:
 		$Animator.play("Switch_Batter")
 	else:
 		switch_batter_ui_elements()
-	percent_text.text = str(int(batting_lineup.get_target_power() * 100)) + "%"
+	percent_text.text = str(int(batting_lineup.get_target_power() * 100))

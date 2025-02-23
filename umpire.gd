@@ -4,7 +4,7 @@ signal game_over(score: int)
 signal set_ball_num(num: int)
 signal set_strike_num(num: int)
 signal set_outs_num(num: int)
-signal batter_hit(pos: Vector2)
+signal batter_hit(y_relative: float)
 
 @export var pitcher: Node3D
 @export var batter_lineup: Node3D
@@ -53,10 +53,17 @@ func process_strike(is_perfect: bool) -> void:
 		print("Umpire: batter %d is out!" % batter_lineup.current_batter())
 		num_outs += 1
 		
-func process_ball_hit() -> void:
+func process_ball_hit(pos: Vector2) -> void:
 	print("Umpire: The batter hits!")
-	batter_hit.emit()
-	
+	# we send a relative value of the bounding box,
+	# 1 if its at the top, -1 if its at the bottom
+	# this is used to animate the y-pos of the batter
+	print("bbox pos-y: %f - size: %f" % [batting_box_bounds.position.y, batting_box_bounds.size.y])
+	var y_relative: float = (pos.y - batting_box_bounds.position.y) / batting_box_bounds.size.y
+	y_relative -= 0.5
+	y_relative *= -2
+	print(y_relative)
+	batter_hit.emit(y_relative) 
 
 func process_pitch(pos: Vector2, power: float, _null) -> void:
 	print("Umpire: processing pitch with power %f at position (%f, %f)" % [power, pos.x, pos.y])
@@ -71,10 +78,10 @@ func process_pitch(pos: Vector2, power: float, _null) -> void:
 	print("Umpire: power_odds: %f" % power_odds)
 	if abs(power_odds - 1.0) < 0.0001:
 		process_strike(true)
-	elif randf() > power_odds:
+	elif randf() <= power_odds:
 		process_strike(false)
 	else:
-		process_ball_hit()
+		process_ball_hit(pos)
 	print_stats()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

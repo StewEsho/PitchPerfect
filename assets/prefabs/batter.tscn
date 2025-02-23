@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://p3dhoxkui2wu"]
+[gd_scene load_steps=11 format=3 uid="uid://p3dhoxkui2wu"]
 
 [ext_resource type="PackedScene" uid="uid://ca4nudo5ijfa0" path="res://assets/models/batter.glb" id="1_1hbo4"]
 [ext_resource type="Script" path="res://assets/prefabs/batter.gd" id="1_dpwkd"]
 [ext_resource type="Texture2D" uid="uid://cmamr8hbbiw60" path="res://assets/models/batter_glasses.png" id="2_xau6y"]
 [ext_resource type="Script" path="res://assets/prefabs/bobble.gd" id="2_ybnhr"]
+[ext_resource type="AudioStream" uid="uid://cpk5umc1bo4ty" path="res://assets/audio/sfx/bat_hit.wav" id="5_u61wl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prm3g"]
 transparency = 1
@@ -163,23 +164,29 @@ script = ExtResource("2_ybnhr")
 mag = 0.05
 
 [node name="Skeleton3D" parent="model/Armature" index="0"]
-bones/2/rotation = Quaternion(-0.0136861, 0.0145326, -0.675037, 0.737513)
-bones/3/rotation = Quaternion(-0.0176802, 0.00749894, -0.548988, 0.835609)
+bones/0/rotation = Quaternion(-0.00454137, -0.0902887, 0.0139276, 0.995808)
+bones/1/rotation = Quaternion(-0.092324, -0.810379, -0.0704264, 0.574284)
+bones/2/rotation = Quaternion(0.144048, -0.175323, -0.607729, 0.761037)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.305894, 0.0155178, -0.344839, 0.887285)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(0.057422, 0.0221103, -0.203752, 0.977087)
-bones/5/rotation = Quaternion(-0.0668807, -0.0112897, -0.151595, 0.986113)
+bones/4/rotation = Quaternion(-0.00409926, -0.165148, 0.0102692, 0.986207)
+bones/5/rotation = Quaternion(-0.0676747, 0.0270025, 0.0317661, 0.996836)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(0.0418967, 0.00146455, 0.101826, 0.993918)
+bones/6/rotation = Quaternion(-0.160604, -0.399159, 0.10087, 0.897053)
 bones/6/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.0136864, -0.0145326, 0.675037, 0.737513)
-bones/10/rotation = Quaternion(-0.0176803, -0.00749904, 0.548988, 0.835609)
+bones/7/rotation = Quaternion(0.0348875, 0.0727618, 0.128277, 0.98845)
+bones/8/rotation = Quaternion(0.569098, 0.0140978, -0.154286, 0.807542)
+bones/9/rotation = Quaternion(0.315274, 0.296134, 0.665444, 0.608351)
+bones/10/rotation = Quaternion(0.58084, 0.195157, 0.521672, 0.593631)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(0.057422, -0.0221103, 0.203752, 0.977087)
-bones/12/rotation = Quaternion(-0.0668807, 0.0112897, 0.151595, 0.986113)
+bones/11/rotation = Quaternion(0.00823196, 0.164601, 0.0113442, 0.986261)
+bones/12/rotation = Quaternion(0.001749, 0.266192, 0.00519499, 0.963905)
 bones/12/scale = Vector3(1, 1, 1)
-bones/13/rotation = Quaternion(0.0418967, -0.00146455, -0.101826, 0.993918)
+bones/13/rotation = Quaternion(-0.000453759, -0.00508537, -0.00257519, 0.999984)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
+bones/14/scale = Vector3(1, 1, 1)
 
 [node name="Glasses" parent="model/Armature/Skeleton3D" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_prm3g")
@@ -191,5 +198,11 @@ autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_afg3c")
 }
+
+[node name="bat_hit_sfx" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_u61wl")
+attenuation_model = 3
+volume_db = -0.65
+pitch_scale = 1.02
 
 [editable path="model"]

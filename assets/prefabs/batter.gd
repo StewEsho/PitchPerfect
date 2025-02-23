@@ -1,5 +1,7 @@
 extends Node3D
 
+signal batter_hits_ball()
+
 @export_range(1, 9) var jersey_num: int = 2
 var is_ready: bool = true
 
@@ -15,3 +17,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	is_ready = !$Animator.is_playing()
+
+func swing() -> void:
+	$model/AnimationPlayer.stop()
+	$model/AnimationPlayer.play("Swing")
+
+func hit_ball() -> void:
+	$bat_hit_sfx.play()
+	batter_hits_ball.emit()
+
+
+func _on_batter_lineup_parent_ready() -> void:
+	batter_hits_ball.connect(get_parent_node_3d()._on_batter_hits_ball)

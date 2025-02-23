@@ -73,18 +73,15 @@ transform = Transform3D(-0.99987, 0.0132953, -0.00910028, -0.0134442, -0.999773,
 [node name="PitchingHud" parent="." instance=ExtResource("2_024tn")]
 
 [node name="BatterUI" parent="PitchingHud" index="5" node_paths=PackedStringArray("batting_lineup")]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 129.0
-offset_bottom = 147.0
 batting_lineup = NodePath("../../BatterLineup")
 
 [node name="Crosshair" parent="PitchingHud" index="7"]
 variance = 120.0
 cursor_speed = 1.75
 
-[node name="BatterLineup" parent="." instance=ExtResource("6_bf2r0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32254, 0.295827, -3.53353)
+[node name="BatterLineup" parent="." node_paths=PackedStringArray("baseball_node") instance=ExtResource("6_bf2r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0.296, -3.534)
+baseball_node = NodePath("../Pitcher/CharacterBody3D/Bobble/pitcher_model/Armature/Skeleton3D/BaseballAttachment/Baseball")
 
 [node name="Batter" parent="." instance=ExtResource("4_l5hpg")]
 visible = false
