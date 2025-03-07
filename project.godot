@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="brackeys_jam_2025"
+config/name="Pitch Perfect"
+config/description="Can you throw a perfect game? No walks, no hits! Just strike out 27 batters in a row, and you win!
+Created in under 168 hours for Brackeys Game Jam 2025.1"
 run/main_scene="res://assets/scenes/title_screen.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://perfect_ball.png"
 
 [display]
 

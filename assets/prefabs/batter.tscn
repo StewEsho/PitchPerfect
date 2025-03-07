@@ -167,7 +167,6 @@ mag = 0.05
 bones/0/rotation = Quaternion(0, -0.0836281, 0, 0.996497)
 bones/1/rotation = Quaternion(0, -0.643322, 0, 0.765596)
 bones/2/rotation = Quaternion(0.166954, -0.182811, -0.654209, 0.714645)
-bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(0.313954, 0.0627598, -0.580483, 0.748688)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/rotation = Quaternion(0.112807, -0.150278, -0.0486396, 0.980982)
@@ -186,7 +185,6 @@ bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(0.0418967, -0.00146457, -0.101826, 0.993918)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/rotation = Quaternion(0.474917, -1.49475e-08, -0.116469, 0.87229)
-bones/14/scale = Vector3(1, 1, 1)
 
 [node name="Glasses" parent="model/Armature/Skeleton3D" index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_prm3g")
